@@ -10,6 +10,7 @@
       font-family: 'Comic Sans MS', cursive, sans-serif;
       background: #fff0f3;
       text-align: center;
+      overflow-x: hidden;
     }
 
     h1 { color: #ff4d6d; padding: 20px; margin: 0; }
@@ -23,28 +24,26 @@
       box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     }
 
-    /* ESTILO KILÓMETROS */
+    /* --- ESTILO KILÓMETROS NUEVO --- */
     #capsula-distancia {
       background: white;
       padding: 15px;
       border-radius: 15px;
       display: inline-block;
-      margin: 0 0 30px 0;
+      margin: 10px 0 30px 0;
       box-shadow: 0 4px 10px rgba(0,0,0,0.05);
       border: 1px solid #ffe6e6;
       min-width: 250px;
     }
+    #kms { font-size: 28px; font-weight: bold; color: #ff4d6d; }
 
-    #kms { font-size: 24px; font-weight: bold; color: #ff4d6d; }
-
-    /* --- LÍNEA DE TIEMPO SIMPLIFICADA --- */
+    /* --- LÍNEA DE TIEMPO --- */
     .timeline {
       position: relative;
       max-width: 900px;
       margin: 20px auto;
       padding-bottom: 50px;
     }
-
     .timeline::after {
       content: '';
       position: absolute;
@@ -55,7 +54,6 @@
       left: 50%;
       margin-left: -3px;
     }
-
     .container-timeline {
       padding: 20px 40px;
       position: relative;
@@ -63,10 +61,8 @@
       box-sizing: border-box;
       min-height: 100px;
     }
-
     .left { left: 0; text-align: right; }
     .right { left: 50%; text-align: left; }
-
     .container-timeline::after {
       content: '❤️';
       position: absolute;
@@ -87,13 +83,7 @@
       width: 100%;
       max-width: 280px;
     }
-
-    .foto-container img {
-      width: 100%;
-      height: auto;
-      display: block;
-      background: #eee;
-    }
+    .foto-container img { width: 100%; height: auto; display: block; background: #eee; }
 
     @media screen and (max-width: 600px) {
       .timeline::after { left: 31px; }
@@ -103,7 +93,6 @@
     }
 
     #sobre { font-size: 80px; cursor: pointer; margin: 50px 0; display: block; }
-    
     #carta-texto {
       display: none;
       background: #fffbe6;
@@ -128,18 +117,19 @@
   <h1>Feliç Aniversari ❤️</h1>
 
   <div id="tiempo-juntos">
-    <p id="titulo-contador" style="margin:0; color:#ff4d6d;">Cargando...</p>
+    <p id="titulo-contador" style="margin:0; color:#ff4d6d;">Comptant...</p>
     <h2 id="reloj" style="margin:5px 0;"></h2>
   </div>
 
   <br>
 
   <div id="capsula-distancia">
-    <p style="margin: 0; font-size: 14px; color: #ff4d6d; font-weight: bold;">DISTÀNCIA RECORREGUDA 🚗</p>
+    <p style="margin: 0; font-size: 14px; color: #ff4d6d; font-weight: bold;">DISTÀNCIA PER VEURE'T 🚗💨</p>
     <div style="display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: 5px;">
       <span id="kms">0</span>
-      <span style="font-size: 18px; color: #555;">km per veure't</span>
+      <span style="font-size: 18px; color: #555;">km totals</span>
     </div>
+    <p style="font-size: 12px; color: #888; margin-top: 5px;">Sant Sadurní ➔ BCN ➔ Terrassa</p>
   </div>
 
   <div class="timeline">
@@ -149,21 +139,18 @@
         <p>BARÇAAAA 💙❤️</p>
       </div>
     </div>
-
     <div class="container-timeline right">
       <div class="foto-container">
         <img src="Foto3.jpg" alt="Foto 3">
         <p>Un dels dies més feliços ❤️</p>
       </div>
     </div>
-
     <div class="container-timeline left">
       <div class="foto-container">
         <img src="Foto2.jpg" alt="Foto 2">
         <p>El nostre primer viatge 🌍</p>
       </div>
     </div>
-
     <div class="container-timeline right">
       <div class="foto-container">
         <img src="Foto4.jpg" alt="Foto 4">
@@ -180,7 +167,7 @@
   </div>
 
   <script>
-    // 1. Contador de tiempo
+    // 1. Contador
     const fechaInicio = new Date(2025, 3, 1);
     function actualizarReloj() {
       const ahora = new Date();
@@ -189,14 +176,14 @@
       const horas = Math.floor((Math.abs(dif) / (1000 * 60 * 60)) % 24);
       const mins = Math.floor((Math.abs(dif) / 1000 / 60) % 60);
       const segs = Math.floor((Math.abs(dif) / 1000) % 60);
-      document.getElementById('titulo-contador').innerText = dif < 0 ? "Faltan para nuestro día:" : "Llevamos juntos:";
+      document.getElementById('titulo-contador').innerText = dif < 0 ? "Falten per al nostre dia:" : "Portem junts:";
       document.getElementById('reloj').innerText = dias + "d " + horas + "h " + mins + "m " + segs + "s";
     }
     setInterval(actualizarReloj, 1000);
     actualizarReloj();
 
-    // 2. Animación de Kilómetros
-    const kmsTotales = 78; // <--- CAMBIA ESTE NÚMERO POR TU DISTANCIA REAL
+    // 2. Animación Kilómetros (Los 78km que calculamos)
+    const kmsTotales = 78; 
     let contadorKms = 0;
     function animarKms() {
       const elementoKms = document.getElementById("kms");
@@ -204,23 +191,23 @@
       const intervalo = setInterval(() => {
         contadorKms += paso;
         if (contadorKms >= kmsTotales) {
-          elementoKms.innerText = kmsTotales.toLocaleString();
+          elementoKms.innerText = kmsTotales;
           clearInterval(intervalo);
         } else {
-          elementoKms.innerText = Math.floor(contadorKms).toLocaleString();
+          elementoKms.innerText = Math.floor(contadorKms);
         }
-      }, 30);
+      }, 40);
     }
     animarKms();
 
-    // 3. Abrir Carta
+    // 3. Carta
     function abrirCarta() {
       const c = document.getElementById("carta-texto");
       c.style.display = c.style.display === "block" ? "none" : "block";
       if(c.style.display === "block") c.scrollIntoView({behavior:'smooth'});
     }
 
-    // 4. Lluvia de Corazones
+    // 4. Corazones
     setInterval(() => {
       const cor = document.createElement("div");
       cor.className = "corazon-caida";
