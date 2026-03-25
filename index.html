@@ -24,7 +24,6 @@
       box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     }
 
-    /* --- ESTILO KILÓMETROS NUEVO --- */
     #capsula-distancia {
       background: white;
       padding: 15px;
@@ -85,6 +84,39 @@
     }
     .foto-container img { width: 100%; height: auto; display: block; background: #eee; }
 
+    /* --- ESTILO NOTAS DESTACADAS --- */
+    #muro-mensajes {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      padding: 20px;
+      max-width: 900px;
+      margin: 40px auto;
+    }
+
+    .nota {
+      padding: 20px;
+      width: 180px;
+      min-height: 100px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 15px;
+      font-weight: bold;
+      color: #333;
+      box-shadow: 5px 5px 15px rgba(0,0,0,0.08);
+      border-radius: 5px;
+      transition: 0.3s;
+      cursor: pointer;
+    }
+
+    .nota:hover {
+      transform: scale(1.1) rotate(0deg) !important;
+      z-index: 20;
+      box-shadow: 10px 10px 25px rgba(0,0,0,0.1);
+    }
+
     @media screen and (max-width: 600px) {
       .timeline::after { left: 31px; }
       .container-timeline { width: 100%; padding-left: 70px; padding-right: 20px; text-align: left; }
@@ -133,30 +165,18 @@
   </div>
 
   <div class="timeline">
-    <div class="container-timeline left">
-      <div class="foto-container">
-        <img src="Foto1.jpg" alt="Foto 1">
-        <p>BARÇAAAA 💙❤️</p>
-      </div>
-    </div>
-    <div class="container-timeline right">
-      <div class="foto-container">
-        <img src="Foto3.jpg" alt="Foto 3">
-        <p>Un dels dies més feliços ❤️</p>
-      </div>
-    </div>
-    <div class="container-timeline left">
-      <div class="foto-container">
-        <img src="Foto2.jpg" alt="Foto 2">
-        <p>El nostre primer viatge 🌍</p>
-      </div>
-    </div>
-    <div class="container-timeline right">
-      <div class="foto-container">
-        <img src="Foto4.jpg" alt="Foto 4">
-        <p>Moments inoblidables 💫</p>
-      </div>
-    </div>
+    <div class="container-timeline left"><div class="foto-container"><img src="Foto1.jpg" alt="Foto 1"><p>BARÇAAAA 💙❤️</p></div></div>
+    <div class="container-timeline right"><div class="foto-container"><img src="Foto3.jpg" alt="Foto 3"><p>Un dels dies més feliços ❤️</p></div></div>
+    <div class="container-timeline left"><div class="foto-container"><img src="Foto2.jpg" alt="Foto 2"><p>El nostre primer viatge 🌍</p></div></div>
+    <div class="container-timeline right"><div class="foto-container"><img src="Foto4.jpg" alt="Foto 4"><p>Moments inoblidables 💫</p></div></div>
+  </div>
+
+  <h2 style="color: #ff4d6d; margin-top: 40px;">Missatges que guardo ✨</h2>
+  <div id="muro-mensajes">
+    <div class="nota" style="transform: rotate(-3deg); background: #fff9c4;">"Ets el millor que m'ha passat" ❤️</div>
+    <div class="nota" style="transform: rotate(2deg); background: #f8bbd0;">"T'estimo molt, alpinista!" 🏔️</div>
+    <div class="nota" style="transform: rotate(-1deg); background: #e1f5fe;">"Gràcies per tot el que fas" ✨</div>
+    <div class="nota" style="transform: rotate(4deg); background: #f1f8e9;">"Sempre junts, el meu wuchu" 🌹</div>
   </div>
 
   <div id="sobre" onclick="abrirCarta()">✉️</div>
@@ -182,7 +202,7 @@
     setInterval(actualizarReloj, 1000);
     actualizarReloj();
 
-    // 2. Animación Kilómetros (Los 78km que calculamos)
+    // 2. Animación Kilómetros
     const kmsTotales = 78; 
     let contadorKms = 0;
     function animarKms() {
