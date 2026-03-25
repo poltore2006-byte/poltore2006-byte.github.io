@@ -2,44 +2,73 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Feliç Aniversari❤️</title>
+  <title>Feliç Aniversari ❤️</title>
 
   <style>
     body {
       margin: 0;
-      font-family: Arial;
-      background: linear-gradient(to bottom, #ffe6e6, #fff);
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(to bottom, #ffe6e6, #ffffff);
       text-align: center;
+      overflow-x: hidden; /* Para que los corazones no ensanchen la web */
     }
 
     h1 {
       color: #ff4d6d;
       margin-top: 40px;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
     }
 
     p {
       font-size: 18px;
+      color: #333;
+      font-weight: bold;
     }
 
+    /* Animación para las fotos */
     img {
       width: 300px;
       border-radius: 20px;
       margin: 20px;
-      box-shadow: 0 0 15px rgba(0,0,0,0.2);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+      transition: transform 0.3s ease;
+    }
+
+    img:hover {
+      transform: scale(1.05) rotate(2deg);
     }
 
     button {
-      padding: 12px 25px;
+      padding: 15px 30px;
       background-color: #ff4d6d;
       color: white;
       border: none;
-      border-radius: 20px;
+      border-radius: 50px;
       cursor: pointer;
-      font-size: 16px;
+      font-size: 18px;
+      margin: 30px 0;
+      box-shadow: 0 5px 15px rgba(255, 77, 109, 0.4);
+      transition: background 0.3s;
     }
 
     button:hover {
       background-color: #ff1f4b;
+      transform: scale(1.1);
+    }
+
+    /* Animación de los corazones cayendo */
+    @keyframes caer {
+      0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+    }
+
+    .corazon-caida {
+      position: fixed;
+      top: -10vh;
+      user-select: none;
+      pointer-events: none;
+      z-index: 999;
+      animation: caer linear forwards;
     }
   </style>
 </head>
@@ -48,7 +77,7 @@
 
   <h1>Feliç Aniversari ❤️</h1>
 
- <img src="https://upload.wikimedia.org/wikipedia/en/4/47/FC_Barcelona_logo.svg" alt="Barça">
+  <img src="https://upload.wikimedia.org/wikipedia/en/4/47/FC_Barcelona_logo.svg" alt="Barça" style="width: 150px;">
   <p>BARÇAAAA 💙❤️</p>
 
   <img src="Foto3.jpg" alt="Nosotros">
@@ -64,9 +93,36 @@
   <button onclick="mensaje()">Clica aquí 💌</button>
 
   <script>
+    // 1. El mensaje del botón
     function mensaje() {
-      alert("Ets el millor que m'ha passat en aquesta vida❤️");
+      alert("Ets el millor que m'ha passat en aquesta vida ❤️");
     }
+
+    // 2. Lógica de la lluvia de corazones
+    function crearCorazon() {
+      const corazon = document.createElement("div");
+      corazon.className = "corazon-caida";
+      corazon.innerHTML = "❤️";
+      
+      // Posición horizontal aleatoria
+      corazon.style.left = Math.random() * 100 + "vw";
+      
+      // Tamaño aleatorio
+      corazon.style.fontSize = Math.random() * 20 + 15 + "px";
+      
+      // Velocidad de caída aleatoria (entre 3 y 6 segundos)
+      corazon.style.animationDuration = Math.random() * 3 + 3 + "s";
+      
+      document.body.appendChild(corazon);
+
+      // Eliminar el corazón cuando termine la animación
+      setTimeout(() => {
+        corazon.remove();
+      }, 6000);
+    }
+
+    // Crear un corazón cada 400ms
+    setInterval(crearCorazon, 400);
   </script>
 
 </body>
