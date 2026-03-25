@@ -90,3 +90,160 @@
       transition: 0.4s;
       animation: brillo 3s infinite;
       max-width: 250px;
+    }
+
+    .foto-container img { width: 100%; display: block; }
+    .foto-container p { margin-top: 10px; font-size: 14px; color: #555; font-weight: bold; }
+    .foto-container:hover { transform: scale(1.1) rotate(0deg) !important; z-index: 10; }
+
+    /* Rotaciones para el efecto "tiradas" */
+    .left .foto-container { transform: rotate(-3deg); }
+    .right .foto-container { transform: rotate(3deg); }
+
+    /* Responsivo para móviles */
+    @media screen and (max-width: 600px) {
+      .timeline::after { left: 31px; }
+      .container-timeline { width: 100%; padding-left: 70px; padding-right: 25px; text-align: left; }
+      .container-timeline::after { left: 18px; }
+      .right { left: 0%; }
+      .left .foto-container, .right .foto-container { transform: rotate(0deg); }
+    }
+
+    /* --- CARTA Y OTROS --- */
+    #sobre { cursor: pointer; font-size: 80px; transition: 0.3s; display: block; margin: 40px auto; }
+    #carta-texto {
+      display: none;
+      background: #fffbe6;
+      border: 1px solid #f0e68c;
+      padding: 30px;
+      width: 85%;
+      max-width: 500px;
+      margin: 20px auto;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      line-height: 1.6;
+      color: #444;
+      border-radius: 10px;
+    }
+
+    .corazon-caida { position: fixed; top: -10vh; z-index: 999; animation: caer linear forwards; }
+    @keyframes caer {
+      0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>Feliç Aniversari ❤️</h1>
+
+  <div id="tiempo-juntos">
+    <p id="titulo-contador" style="margin: 0; color: #ff4d6d;">Comptant moments...</p>
+    <h2 id="reloj" style="margin: 5px 0; color: #333;"></h2>
+  </div>
+
+  <div class="timeline">
+    
+    <div class="container-timeline left">
+      <div class="foto-container">
+        <img src="Foto1.jpg" alt="Inici">
+        <p>BARÇAAAA 💙❤️<br><small>El començament</small></p>
+      </div>
+    </div>
+
+    <div class="container-timeline right">
+      <div class="foto-container">
+        <img src="Foto3.jpg" alt="Feliços">
+        <p>Un dels dies més feliços ❤️</p>
+      </div>
+    </div>
+
+    <div class="container-timeline left">
+      <div class="foto-container">
+        <img src="Foto2.jpg" alt="Viatge">
+        <p>El nostre primer viatge 🌍</p>
+      </div>
+    </div>
+
+    <div class="container-timeline right">
+      <div class="foto-container">
+        <img src="Foto4.jpg" alt="Moments">
+        <p>Moments inoblidables 💫<br><small>Sempre junts</small></p>
+      </div>
+    </div>
+
+  </div>
+
+  <div id="sobre" onclick="abrirCarta()">✉️</div>
+  <div id="carta-texto">
+    <h3>Per a la meva nena ❤️</h3>
+    <p>Ets la millor persona que he conegut mai. <br> 
+    Gràcies per aguantar-me i per fer-me tan feliç cada dia. <br> 
+    Aquest és només un petit detall per recordar-te que t'estimo molt! <br><br>
+    <b>Feliç Aniversari! 🎂</b></p>
+  </div>
+
+  <script>
+    function abrirCarta() {
+      const carta = document.getElementById("carta-texto");
+      const sobre = document.getElementById("sobre");
+      if(carta.style.display === "block") {
+        carta.style.display = "none";
+        sobre.innerText = "✉️";
+      } else {
+        carta.style.display = "block";
+        sobre.innerText = "📂";
+        setTimeout(() => { carta.scrollIntoView({ behavior: 'smooth' }); }, 100);
+      }
+    }
+
+    const fechaInicio = new Date(2025, 3, 1); 
+    function actualizarReloj() {
+      const ahora = new Date();
+      const dif = ahora - fechaInicio;
+      const dias = Math.floor(Math.abs(dif) / (1000 * 60 * 60 * 24));
+      const horas = Math.floor((Math.abs(dif) / (1000 * 60 * 60)) % 24);
+      const mins = Math.floor((Math.abs(dif) / 1000 / 60) % 60);
+      const segs = Math.floor((Math.abs(dif) / 1000) % 60);
+      document.getElementById('titulo-contador').innerText = dif < 0 ? "Falten per al nostre dia:" : "Portem sent feliços:";
+      document.getElementById('reloj').innerText = `${dias}d ${horas}h ${mins}m ${segs}s`;
+    }
+    actualizarReloj();
+    setInterval(actualizarReloj, 1000);
+
+    function crearCorazon() {
+      const corazon = document.createElement("div");
+      corazon.className = "corazon-caida";
+      corazon.innerHTML = "❤️";
+      corazon.style.left = Math.random() * 100 + "vw";
+      corazon.style.fontSize = Math.random() * 20 + 15 + "px";
+      corazon.style.animationDuration = Math.random() * 3 + 3 + "s";
+      document.body.appendChild(corazon);
+      setTimeout(() => { corazon.remove(); }, 6000);
+    }
+    setInterval(crearCorazon, 400);
+
+    const frases = ["T'estimo ❤️", "Ets única ✨", "Sempre junts 🌍", "MI WUCHU🌹", "Ets preciosa 😍", "Mi Alpinista🏔️"];
+    function crearFraseFlotante() {
+        const texto = document.createElement("div");
+        texto.innerText = frases[Math.floor(Math.random() * frases.length)];
+        texto.style.position = "fixed";
+        texto.style.left = Math.random() * 70 + 15 + "vw";
+        texto.style.top = Math.random() * 70 + 15 + "vh";
+        texto.style.color = "#ff4d6d";
+        texto.style.fontWeight = "bold";
+        texto.style.fontSize = "20px";
+        texto.style.opacity = "0";
+        texto.style.transition = "opacity 2s";
+        texto.style.pointerEvents = "none";
+        texto.style.zIndex = "1000";
+        document.body.appendChild(texto);
+        setTimeout(() => { texto.style.opacity = "1"; }, 100);
+        setTimeout(() => { texto.style.opacity = "0"; }, 3000);
+        setTimeout(() => { texto.remove(); }, 5000);
+    }
+    setInterval(crearFraseFlotante, 4000);
+  </script>
+
+</body>
+</html>
