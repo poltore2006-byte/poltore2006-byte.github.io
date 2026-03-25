@@ -7,7 +7,7 @@
   <style>
     body {
       margin: 0;
-      font-family: 'Comic Sans MS', cursive, sans-serif; /* Un toque más personal */
+      font-family: 'Comic Sans MS', cursive, sans-serif;
       background: linear-gradient(to bottom, #ffe6e6, #ffffff);
       text-align: center;
       overflow-x: hidden;
@@ -24,7 +24,7 @@
       box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     }
 
-    /* EFECTO POLAROID */
+    /* EFECTO POLAROID CORREGIDO */
     .foto-container {
       display: inline-block;
       background: white;
@@ -32,34 +32,26 @@
       margin: 20px;
       border: 1px solid #ddd;
       box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-      transform: rotate(-3deg); /* Unas giradas a un lado... */
       transition: 0.4s;
-      opacity: 0; /* Para el efecto scroll */
+      /* Eliminada la opacidad 0 para que no fallen */
     }
 
-    .foto-container:nth-child(even) {
-      transform: rotate(3deg); /* ...y otras al otro */
-    }
+    /* Rotación individual para que parezcan tiradas en una mesa */
+    .foto-container:nth-child(1) { transform: rotate(-3deg); }
+    .foto-container:nth-child(2) { transform: rotate(2deg); }
+    .foto-container:nth-child(3) { transform: rotate(-2deg); }
+    .foto-container:nth-child(4) { transform: rotate(3deg); }
 
     .foto-container img {
       width: 280px;
       display: block;
-      border-radius: 0; /* Las polaroid son rectas */
     }
 
     .foto-container p {
       margin-top: 15px;
       font-size: 16px;
       color: #555;
-    }
-
-    .foto-container.visible {
-      opacity: 1;
-      transform: translateY(0) rotate(-3deg);
-    }
-    
-    .foto-container.visible:nth-child(even) {
-        transform: translateY(0) rotate(3deg);
+      font-weight: bold;
     }
 
     .foto-container:hover {
@@ -67,7 +59,6 @@
       z-index: 10;
     }
 
-    /* SOBRE DE CARTA */
     #sobre {
       cursor: pointer;
       font-size: 80px;
@@ -78,11 +69,11 @@
     #sobre:hover { transform: scale(1.2); }
 
     #carta-texto {
-      display: none; /* Oculta hasta que se clica el sobre */
+      display: none;
       background: #fffbe6;
       border: 1px solid #f0e68c;
       padding: 30px;
-      width: 80%;
+      width: 85%;
       max-width: 500px;
       margin: 20px auto;
       box-shadow: 0 5px 15px rgba(0,0,0,0.1);
@@ -110,7 +101,7 @@
   <h1>Feliç Aniversari ❤️</h1>
 
   <div id="tiempo-juntos">
-    <p id="titulo-contador" style="margin: 0; color: #ff4d6d;">Cargando...</p>
+    <p id="titulo-contador" style="margin: 0; color: #ff4d6d;">Comptant moments...</p>
     <h2 id="reloj" style="margin: 5px 0; color: #333;"></h2>
   </div>
 
@@ -140,11 +131,13 @@
   
   <div id="carta-texto">
     <h3>Per a la meva nena ❤️</h3>
-    <p>Aquí pots escriure tot el que vulguis. <br> Gràcies per aquest temps junts, ets la persona més especial del món. <br> T'estimo moltíssim!</p>
+    <p>Ets la millor persona que he conegut mai. <br> 
+    Gràcies per aguantar-me i per fer-me tan feliç cada dia. <br> 
+    Aquest és només un petit detall per recordar-te que t'estimo molt! <br><br>
+    <b>Feliç Aniversari! 🎂</b></p>
   </div>
 
   <script>
-    // 1. CARTA
     function abrirCarta() {
       const carta = document.getElementById("carta-texto");
       const sobre = document.getElementById("sobre");
@@ -154,11 +147,14 @@
       } else {
         carta.style.display = "block";
         sobre.innerText = "📂";
-        window.scrollTo(0, document.body.scrollHeight);
+        // Esto hace que la pantalla baje sola para leer la carta
+        setTimeout(() => {
+          carta.scrollIntoView({ behavior: 'smooth' });
+        }, 100);
       }
     }
 
-    // 2. CONTADOR (1 Abril 2025)
+    // Fecha: 1 de Abril de 2025 (Mes 3 en JS)
     const fechaInicio = new Date(2025, 3, 1); 
     function actualizarReloj() {
       const ahora = new Date();
@@ -167,13 +163,14 @@
       const horas = Math.floor((Math.abs(dif) / (1000 * 60 * 60)) % 24);
       const mins = Math.floor((Math.abs(dif) / 1000 / 60) % 60);
       const segs = Math.floor((Math.abs(dif) / 1000) % 60);
-      document.getElementById('titulo-contador').innerText = dif < 0 ? "Faltan para nuestro día:" : "Llevamos juntos:";
+      
+      document.getElementById('titulo-contador').innerText = dif < 0 ? "Falten per al nostre dia:" : "Portem sent feliços:";
       document.getElementById('reloj').innerText = `${dias}d ${horas}h ${mins}m ${segs}s`;
     }
-    setInterval(actualizarReloj, 1000);
+    // Actualización inmediata y luego cada segundo
     actualizarReloj();
+    setInterval(actualizarReloj, 1000);
 
-    // 3. CORAZONES
     function crearCorazon() {
       const corazon = document.createElement("div");
       corazon.className = "corazon-caida";
@@ -185,14 +182,6 @@
       setTimeout(() => { corazon.remove(); }, 6000);
     }
     setInterval(crearCorazon, 400);
-
-    // 4. SCROLL EFFECT
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) { entry.target.classList.add('visible'); }
-      });
-    }, { threshold: 0.1 });
-    document.querySelectorAll('.foto-container').forEach(el => observer.observe(el));
   </script>
 
 </body>
