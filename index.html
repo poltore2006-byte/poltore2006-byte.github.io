@@ -8,7 +8,7 @@
     body {
       margin: 0;
       font-family: 'Comic Sans MS', cursive, sans-serif;
-      background: #fff0f3; /* Color sólido para que no falle */
+      background: #fff0f3;
       text-align: center;
     }
 
@@ -19,9 +19,23 @@
       padding: 15px;
       border-radius: 15px;
       display: inline-block;
-      margin: 20px 0;
+      margin: 20px 0 10px 0;
       box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     }
+
+    /* ESTILO KILÓMETROS */
+    #capsula-distancia {
+      background: white;
+      padding: 15px;
+      border-radius: 15px;
+      display: inline-block;
+      margin: 0 0 30px 0;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+      border: 1px solid #ffe6e6;
+      min-width: 250px;
+    }
+
+    #kms { font-size: 24px; font-weight: bold; color: #ff4d6d; }
 
     /* --- LÍNEA DE TIEMPO SIMPLIFICADA --- */
     .timeline {
@@ -31,7 +45,6 @@
       padding-bottom: 50px;
     }
 
-    /* La línea roja central */
     .timeline::after {
       content: '';
       position: absolute;
@@ -48,13 +61,12 @@
       position: relative;
       width: 50%;
       box-sizing: border-box;
-      min-height: 100px; /* Para que no desaparezca si no hay foto */
+      min-height: 100px;
     }
 
     .left { left: 0; text-align: right; }
     .right { left: 50%; text-align: left; }
 
-    /* Los corazones de la línea */
     .container-timeline::after {
       content: '❤️';
       position: absolute;
@@ -66,7 +78,6 @@
     }
     .right::after { left: -14px; }
 
-    /* Estilo Polaroid */
     .foto-container {
       background: white;
       padding: 10px;
@@ -81,10 +92,9 @@
       width: 100%;
       height: auto;
       display: block;
-      background: #eee; /* Fondo gris por si la foto no carga */
+      background: #eee;
     }
 
-    /* Responsivo para móvil (MUY IMPORTANTE) */
     @media screen and (max-width: 600px) {
       .timeline::after { left: 31px; }
       .container-timeline { width: 100%; padding-left: 70px; padding-right: 20px; text-align: left; }
@@ -120,6 +130,16 @@
   <div id="tiempo-juntos">
     <p id="titulo-contador" style="margin:0; color:#ff4d6d;">Cargando...</p>
     <h2 id="reloj" style="margin:5px 0;"></h2>
+  </div>
+
+  <br>
+
+  <div id="capsula-distancia">
+    <p style="margin: 0; font-size: 14px; color: #ff4d6d; font-weight: bold;">DISTÀNCIA RECORREGUDA 🚗</p>
+    <div style="display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: 5px;">
+      <span id="kms">0</span>
+      <span style="font-size: 18px; color: #555;">km per veure't</span>
+    </div>
   </div>
 
   <div class="timeline">
@@ -160,7 +180,7 @@
   </div>
 
   <script>
-    // Contador
+    // 1. Contador de tiempo
     const fechaInicio = new Date(2025, 3, 1);
     function actualizarReloj() {
       const ahora = new Date();
@@ -175,14 +195,32 @@
     setInterval(actualizarReloj, 1000);
     actualizarReloj();
 
-    // Carta
+    // 2. Animación de Kilómetros
+    const kmsTotales = 1250; // <--- CAMBIA ESTE NÚMERO POR TU DISTANCIA REAL
+    let contadorKms = 0;
+    function animarKms() {
+      const elementoKms = document.getElementById("kms");
+      const paso = kmsTotales / 50; 
+      const intervalo = setInterval(() => {
+        contadorKms += paso;
+        if (contadorKms >= kmsTotales) {
+          elementoKms.innerText = kmsTotales.toLocaleString();
+          clearInterval(intervalo);
+        } else {
+          elementoKms.innerText = Math.floor(contadorKms).toLocaleString();
+        }
+      }, 30);
+    }
+    animarKms();
+
+    // 3. Abrir Carta
     function abrirCarta() {
       const c = document.getElementById("carta-texto");
       c.style.display = c.style.display === "block" ? "none" : "block";
       if(c.style.display === "block") c.scrollIntoView({behavior:'smooth'});
     }
 
-    // Corazones
+    // 4. Lluvia de Corazones
     setInterval(() => {
       const cor = document.createElement("div");
       cor.className = "corazon-caida";
