@@ -11,7 +11,7 @@
       background: linear-gradient(to bottom, #ffe6e6, #ffffff);
       text-align: center;
       overflow-x: hidden;
-      transition: background 1s ease; /* Para que el cambio al modo Barça sea suave */
+      transition: background 1s ease;
     }
 
     h1 {
@@ -36,15 +36,27 @@
       font-weight: bold;
     }
 
+    /* Estilos base para el efecto de fundido de las imágenes */
     img {
       width: 300px;
       border-radius: 20px;
       margin: 20px;
       box-shadow: 0 10px 20px rgba(0,0,0,0.15);
-      transition: transform 0.3s ease;
+      transition: transform 0.3s ease, opacity 1s ease-out, transform-origin 1s ease-out;
+      
+      /* Estado inicial (oculto) */
+      opacity: 0;
+      transform: translateY(20px);
     }
 
-    img:hover {
+    /* Estado final (visible al hacer scroll) */
+    img.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Efecto hover sobre la imagen ya visible */
+    img.visible:hover {
       transform: scale(1.05) rotate(2deg);
     }
 
@@ -91,7 +103,7 @@
   <h1>Feliç Aniversari ❤️</h1>
 
   <div id="tiempo-juntos">
-    <p style="margin: 0; color: #ff4d6d;">Portem junts:</p>
+    <p id="titulo-contador" style="margin: 0; color: #ff4d6d;">Portem junts:</p>
     <h2 id="reloj" style="margin: 5px 0; color: #333;">Cargando...</h2>
   </div>
 
@@ -115,20 +127,25 @@
   <button class="btn-barca" onclick="modoBarca()">Força Barça! 🔵🔴</button>
 
   <script>
-    // 1. CONFIGURACIÓN DEL CONTADOR (Cambia la fecha aquí)
-    // 2025, 04, 1
+    // 1. CONFIGURACIÓN DEL CONTADOR (Corregida para el 1 de Abril de 2025)
+    // Año, Mes (3 es Abril: Enero=0, Feb=1, Mar=2, Abr=3), Día
     const fechaInicio = new Date(2025, 3, 1); 
 
     function actualizarReloj() {
       const ahora = new Date();
       const dif = ahora - fechaInicio;
 
-      const dias = Math.floor(dif / (1000 * 60 * 60 * 24));
-      const horas = Math.floor((dif / (1000 * 60 * 60)) % 24);
-      const mins = Math.floor((dif / 1000 / 60) % 60);
-      const segs = Math.floor((dif / 1000) % 60);
+      // Usamos Math.abs() para mostrar el valor absoluto (sin signo negativo)
+      const dias = Math.floor(Math.abs(dif) / (1000 * 60 * 60 * 24));
+      const horas = Math.floor((Math.abs(dif) / (1000 * 60 * 60)) % 24);
+      const mins = Math.floor((Math.abs(dif) / 1000 / 60) % 60);
+      const segs = Math.floor((Math.abs(dif) / 1000) % 60);
 
-      document.getElementById('reloj').innerText = `${dias}d ${horas}h ${mins}m ${segs}s`;
+      const prefijo = dif < 0 ? "Falten " : "Portem ";
+      const sufijo = dif < 0 ? " per al nostre dia!" : "";
+
+      document.getElementById('titulo-contador').innerText = prefijo + "sent feliços:";
+      document.getElementById('reloj').innerText = `${dias}d ${horas}h ${mins}m ${segs}s${sufijo}`;
     }
     setInterval(actualizarReloj, 1000);
     actualizarReloj();
@@ -157,9 +174,17 @@
       setTimeout(() => { corazon.remove(); }, 6000);
     }
     setInterval(crearCorazon, 400);
-  </script>
 
-</body>
-</html>
-</body>
-</html>
+    // 5. EFECTO DE FUNDIDO AL HACER SCROLL
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, {
+      // Ajuste opcional: la imagen se considera visible cuando el 10% entra en pantalla
+      threshold: 0.1 
+    });
+
+    document.querySelectorAll('img').forEach(img => observer
