@@ -24,28 +24,29 @@
       box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     }
 
-    /* EFECTO POLAROID CORREGIDO */
+    /* EFECTO POLAROID CON BRILLO ANIMADO */
+    @keyframes brillo {
+      0% { box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
+      50% { box-shadow: 0 0 25px rgba(255, 77, 109, 0.6); }
+      100% { box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
+    }
+
     .foto-container {
       display: inline-block;
       background: white;
       padding: 15px 15px 40px 15px;
       margin: 20px;
       border: 1px solid #ddd;
-      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
       transition: 0.4s;
-      /* Eliminada la opacidad 0 para que no fallen */
+      animation: brillo 3s infinite; /* Brillo suave constante */
     }
 
-    /* Rotación individual para que parezcan tiradas en una mesa */
     .foto-container:nth-child(1) { transform: rotate(-3deg); }
     .foto-container:nth-child(2) { transform: rotate(2deg); }
     .foto-container:nth-child(3) { transform: rotate(-2deg); }
     .foto-container:nth-child(4) { transform: rotate(3deg); }
 
-    .foto-container img {
-      width: 280px;
-      display: block;
-    }
+    .foto-container img { width: 280px; display: block; }
 
     .foto-container p {
       margin-top: 15px;
@@ -66,7 +67,6 @@
       display: block;
       margin: 40px auto;
     }
-    #sobre:hover { transform: scale(1.2); }
 
     #carta-texto {
       display: none;
@@ -106,29 +106,13 @@
   </div>
 
   <div id="galeria">
-    <div class="foto-container">
-      <img src="Foto1.jpg" alt="Barça">
-      <p>BARÇAAAA 💙❤️</p>
-    </div>
-
-    <div class="foto-container">
-      <img src="Foto3.jpg" alt="Nosotros">
-      <p>Un dels dies més feliços ❤️</p>
-    </div>
-
-    <div class="foto-container">
-      <img src="Foto2.jpg" alt="Nosotros">
-      <p>El nostre primer viatge 🌍</p>
-    </div>
-
-    <div class="foto-container">
-      <img src="Foto4.jpg" alt="Nosotros">
-      <p>Moments inoblidables 💫</p>
-    </div>
+    <div class="foto-container"><img src="Foto1.jpg" alt="Barça"><p>BARÇAAAA 💙❤️</p></div>
+    <div class="foto-container"><img src="Foto3.jpg" alt="Nosotros"><p>Un dels dies més feliços ❤️</p></div>
+    <div class="foto-container"><img src="Foto2.jpg" alt="Nosotros"><p>El nostre primer viatge 🌍</p></div>
+    <div class="foto-container"><img src="Foto4.jpg" alt="Nosotros"><p>Moments inoblidables 💫</p></div>
   </div>
 
   <div id="sobre" onclick="abrirCarta()">✉️</div>
-  
   <div id="carta-texto">
     <h3>Per a la meva nena ❤️</h3>
     <p>Ets la millor persona que he conegut mai. <br> 
@@ -147,14 +131,10 @@
       } else {
         carta.style.display = "block";
         sobre.innerText = "📂";
-        // Esto hace que la pantalla baje sola para leer la carta
-        setTimeout(() => {
-          carta.scrollIntoView({ behavior: 'smooth' });
-        }, 100);
+        setTimeout(() => { carta.scrollIntoView({ behavior: 'smooth' }); }, 100);
       }
     }
 
-    // Fecha: 1 de Abril de 2025 (Mes 3 en JS)
     const fechaInicio = new Date(2025, 3, 1); 
     function actualizarReloj() {
       const ahora = new Date();
@@ -163,11 +143,9 @@
       const horas = Math.floor((Math.abs(dif) / (1000 * 60 * 60)) % 24);
       const mins = Math.floor((Math.abs(dif) / 1000 / 60) % 60);
       const segs = Math.floor((Math.abs(dif) / 1000) % 60);
-      
       document.getElementById('titulo-contador').innerText = dif < 0 ? "Falten per al nostre dia:" : "Portem sent feliços:";
       document.getElementById('reloj').innerText = `${dias}d ${horas}h ${mins}m ${segs}s`;
     }
-    // Actualización inmediata y luego cada segundo
     actualizarReloj();
     setInterval(actualizarReloj, 1000);
 
@@ -182,6 +160,28 @@
       setTimeout(() => { corazon.remove(); }, 6000);
     }
     setInterval(crearCorazon, 400);
+
+    // NUEVO: FRASES FLOTANTES
+    const frases = ["T'estimo ❤️", "Ets única ✨", "Sempre junts 🌍", "La meva nena 🌹", "Ets preciosa 😍"];
+    function crearFraseFlotante() {
+        const texto = document.createElement("div");
+        texto.innerText = frases[Math.floor(Math.random() * frases.length)];
+        texto.style.position = "fixed";
+        texto.style.left = Math.random() * 70 + 15 + "vw";
+        texto.style.top = Math.random() * 70 + 15 + "vh";
+        texto.style.color = "#ff4d6d";
+        texto.style.fontWeight = "bold";
+        texto.style.fontSize = "20px";
+        texto.style.opacity = "0";
+        texto.style.transition = "opacity 2s";
+        texto.style.pointerEvents = "none";
+        texto.style.zIndex = "1000";
+        document.body.appendChild(texto);
+        setTimeout(() => { texto.style.opacity = "1"; }, 100);
+        setTimeout(() => { texto.style.opacity = "0"; }, 3000);
+        setTimeout(() => { texto.remove(); }, 5000);
+    }
+    setInterval(crearFraseFlotante, 4000);
   </script>
 
 </body>
