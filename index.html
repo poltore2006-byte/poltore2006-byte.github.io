@@ -69,14 +69,28 @@
     .foto-container {
       background: white; padding: 10px; border: 1px solid #ddd;
       box-shadow: 0 10px 20px rgba(0,0,0,0.1); display: inline-block; width: 100%; max-width: 280px;
+      transition: transform 0.3s ease;
     }
+    .foto-container:hover { transform: scale(1.02); }
     
-    .foto-container img, .foto-container video { 
+    .foto-container img { 
       width: 100%; 
       height: auto; 
       display: block; 
       background: #eee; 
-      cursor: pointer;
+    }
+
+    /* Estil botó reproducció */
+    .btn-play {
+      background: #ff4d6d;
+      color: white;
+      padding: 8px;
+      font-size: 12px;
+      border-radius: 5px;
+      margin-top: 10px;
+      display: block;
+      text-decoration: none;
+      font-weight: bold;
     }
 
     /* --- ESTILO NOTAS QUE GIRAN --- */
@@ -140,8 +154,11 @@
 
   <div class="timeline">
     <div class="container-timeline left">
-      <div class="foto-container" id="wrapper-video">
-        <img src="miniatura-video.jpg" alt="Moment màgic" onclick="reproducirVideo()" id="img-placeholder">
+      <div class="foto-container">
+        <a href="Video1.mp4" target="_blank" style="text-decoration: none; color: inherit;">
+            <img src="miniatura-video.jpg" alt="Moment màgic">
+            <span class="btn-play">▶️ CLICA PER VEURE EL VÍDEO</span>
+        </a>
         <p>Un moment màgic 🎥❤️</p>
       </div>
     </div>
@@ -167,7 +184,7 @@
     <div class="flip-card">
       <div class="flip-card-inner">
         <div class="flip-card-front">"Vols que anem al Camp Nou?" 🏟️</div>
-        <div class="flip-card-back">"I tant! Amb tu a qualsevol lloc" ❤️</div>
+        <div class="flip-card-back">"I tant! Amb tu a queller lloc" ❤️</div>
       </div>
     </div>
     <div class="flip-card">
@@ -192,18 +209,7 @@
   </div>
 
   <script>
-    // FUNCIÓ NOVA PER REPRODUIR EL VÍDEO EN CLICAR LA IMATGE
-    function reproducirVideo() {
-      const contenedor = document.getElementById('wrapper-video');
-      contenedor.innerHTML = `
-        <video controls autoplay style="width: 100%; display: block;">
-          <source src="Video1.mp4" type="video/mp4">
-          El teu navegador no suporta vídeos.
-        </video>
-        <p>Un moment màgic 🎥❤️</p>
-      `;
-    }
-
+    // RELOTGE
     const fechaInicio = new Date(2025, 3, 1);
     function actualizarReloj() {
       const ahora = new Date();
@@ -218,6 +224,7 @@
     setInterval(actualizarReloj, 1000);
     actualizarReloj();
 
+    // KMS
     const kmsTotales = 78; 
     let contadorKms = 0;
     function animarKms() {
@@ -230,12 +237,14 @@
     }
     animarKms();
 
+    // CARTA
     function abrirCarta() {
       const c = document.getElementById("carta-texto");
       c.style.display = c.style.display === "block" ? "none" : "block";
       if(c.style.display === "block") c.scrollIntoView({behavior:'smooth'});
     }
 
+    // CORAZONES
     setInterval(() => {
       const cor = document.createElement("div");
       cor.className = "corazon-caida";
