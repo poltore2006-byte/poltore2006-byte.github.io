@@ -246,6 +246,16 @@
     <p id="resultat-quiz" style="margin-top: 20px; font-weight: bold; min-height: 24px;"></p>
   </div>
 
+  <div id="seccio-panic" style="margin: 50px auto; max-width: 400px; background: white; padding: 20px; border-radius: 20px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); position: relative;">
+      <h3 style="color: #ff4d6d;">Pregunta seriosa... 🤔</h3>
+      <p>M'estimaràs per sempre?</p>
+      
+      <div style="display: flex; justify-content: center; gap: 20px; margin-top: 20px; height: 50px; align-items: center;">
+          <button class="btn-quiz" onclick="alert('Jo també t\'estimaré sempre! ❤️')">SÍ, CLAR! 😍</button>
+          <button id="boto-no" class="btn-quiz" style="position: absolute;">NO 😜</button>
+      </div>
+  </div>
+
   <div id="sobre" onclick="abrirCarta()">✉️</div>
 
   <div id="carta-texto">
@@ -254,7 +264,7 @@
   </div>
 
   <script>
-    // --- CONTADOR I ALTRES LÒGIQUES (Mantingudes) ---
+    // --- CONTADOR I ALTRES LÒGIQUES ---
     const fechaInicio = new Date(2025, 3, 1);
     function actualizarReloj() {
       const ahora = new Date();
@@ -286,14 +296,12 @@
       mur.appendChild(span);
     }
 
-    // --- LÒGICA NOVA PER A MULTIPLES PREGUNTES ---
-    
-    // 1. AQUÍ AFEGEIXES LES TEVES PREGUNTES
+    // --- LÒGICA PER A MULTIPLES PREGUNTES ---
     const preguntes = [
       {
         p: "Quina de les tres és el que mes m'agrada de tu?",
         r: ["Els teus peuets", "La teva careta", "El teu caràcter"],
-        correcta: 0 // La segona opció (comença a comptar des de 0)
+        correcta: 0
       },
       {
         p: "Quina paraule vam utilitzar per confesarnos que ens agradavem?",
@@ -313,7 +321,7 @@
       const dades = preguntes[preguntaActual];
       document.getElementById('pregunta').innerText = dades.p;
       const contenidorOpcions = document.getElementById('opcions');
-      contenidorOpcions.innerHTML = ""; // Neteja botons anteriors
+      contenidorOpcions.innerHTML = "";
 
       dades.r.forEach((resposta, index) => {
         const boto = document.createElement('button');
@@ -329,8 +337,6 @@
       if (esCorrecte) {
         text.innerText = "✅ SIIII! ❤️";
         text.style.color = "green";
-        
-        // Espera 1.5 segons i passa a la següent pregunta
         setTimeout(() => {
           preguntaActual++;
           if (preguntaActual < preguntes.length) {
@@ -340,15 +346,30 @@
             document.getElementById('minijoc').innerHTML = "<h3 style='color:#ff4d6d'>🎉 UEEEEEE 🎉</h3><p>Ets la millor! T'estimo!</p>";
           }
         }, 1500);
-
       } else {
         text.innerText = "❌ WUCHUUUU... esque no m'estimas??! 😜";
         text.style.color = "red";
       }
     }
 
-    // Inicia el joc per primer cop
     carregarPregunta();
+
+    // --- LÒGICA BOTÓ DEL PÀNIC (S'ESCAPA) ---
+    const botoNo = document.getElementById('boto-no');
+    botoNo.addEventListener('mouseover', function() {
+        const x = Math.random() * (window.innerWidth - botoNo.clientWidth);
+        const y = Math.random() * (window.innerHeight - botoNo.clientHeight);
+        botoNo.style.left = x + 'px';
+        botoNo.style.top = y + 'px';
+        botoNo.style.position = 'fixed';
+    });
+    botoNo.addEventListener('touchstart', function(e) {
+        e.preventDefault();
+        const x = Math.random() * (window.innerWidth - botoNo.clientWidth);
+        const y = Math.random() * (window.innerHeight - botoNo.clientHeight);
+        botoNo.style.left = x + 'px';
+        botoNo.style.top = y + 'px';
+    });
 
     function abrirCarta() {
       const c = document.getElementById("carta-texto");
