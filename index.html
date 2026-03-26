@@ -70,13 +70,13 @@
       background: white; padding: 10px; border: 1px solid #ddd;
       box-shadow: 0 10px 20px rgba(0,0,0,0.1); display: inline-block; width: 100%; max-width: 280px;
     }
-    /* Estil per imatges i vídeos per igual */
+    
     .foto-container img, .foto-container video { 
       width: 100%; 
       height: auto; 
       display: block; 
       background: #eee; 
-      cursor: pointer; /* Perquè sàpiga que es pot clicar */
+      cursor: pointer;
     }
 
     /* --- ESTILO NOTAS QUE GIRAN --- */
@@ -140,11 +140,8 @@
 
   <div class="timeline">
     <div class="container-timeline left">
-      <div class="foto-container">
-        <video controls poster="miniatura-video.jpg">
-          <source src="vostre-video.mp4" type="video/mp4">
-          El teu navegador no suporta vídeos.
-        </video>
+      <div class="foto-container" id="wrapper-video">
+        <img src="miniatura-video.jpg" alt="Moment màgic" onclick="reproducirVideo()" id="img-placeholder">
         <p>Un moment màgic 🎥❤️</p>
       </div>
     </div>
@@ -195,6 +192,18 @@
   </div>
 
   <script>
+    // FUNCIÓ NOVA PER REPRODUIR EL VÍDEO EN CLICAR LA IMATGE
+    function reproducirVideo() {
+      const contenedor = document.getElementById('wrapper-video');
+      contenedor.innerHTML = `
+        <video controls autoplay style="width: 100%; display: block;">
+          <source src="vostre-video.mp4" type="video/mp4">
+          El teu navegador no suporta vídeos.
+        </video>
+        <p>Un moment màgic 🎥❤️</p>
+      `;
+    }
+
     const fechaInicio = new Date(2025, 3, 1);
     function actualizarReloj() {
       const ahora = new Date();
