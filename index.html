@@ -72,7 +72,14 @@
     }
     .foto-container img { width: 100%; height: auto; display: block; background: #eee; }
 
-    /* --- ESTILO NOTAS QUE GIRAN (PREGUNTA/RESPUESTA) --- */
+    /* BOTÓ VÍDEO DRIVE */
+    .btn-video { 
+      background: #ff4d6d; color: white !important; text-decoration: none; 
+      padding: 12px; border-radius: 10px; display: block; margin-top: 10px; 
+      font-weight: bold; font-size: 14px; border: none; cursor: pointer; 
+    }
+
+    /* --- ESTILO NOTAS QUE GIRAN --- */
     #muro-mensajes {
       display: flex;
       flex-wrap: wrap;
@@ -87,7 +94,7 @@
       background-color: transparent;
       width: 200px;
       height: 120px;
-      perspective: 1000px; /* Efecto 3D */
+      perspective: 1000px;
     }
 
     .flip-card-inner {
@@ -101,7 +108,6 @@
       border-radius: 10px;
     }
 
-    /* Al pasar el ratón, la carta gira */
     .flip-card:hover .flip-card-inner {
       transform: rotateY(180deg);
     }
@@ -110,7 +116,6 @@
       position: absolute;
       width: 100%;
       height: 100%;
-      -webkit-backface-visibility: hidden; /* Oculta la parte de atrás al girar */
       backface-visibility: hidden;
       display: flex;
       align-items: center;
@@ -122,18 +127,17 @@
       font-size: 14px;
     }
 
-    .flip-card-front {
-      background-color: #fff9c4; /* Color pregunta */
-      color: #333;
-    }
+    .flip-card-front { background-color: #fff9c4; color: #333; }
+    .flip-card-back { background-color: #f8bbd0; color: #333; transform: rotateY(180deg); }
 
-    .flip-card-back {
-      background-color: #f8bbd0; /* Color respuesta */
-      color: #333;
-      transform: rotateY(180deg);
+    /* --- MUR DE PETONS --- */
+    #mur-petons { 
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(60px, 1fr)); 
+      gap: 15px; max-width: 500px; margin: 30px auto; padding: 20px; 
+      background: white; border-radius: 20px; box-shadow: 0 10px 30px rgba(255, 77, 109, 0.15); 
     }
-
-    /* -------------------------------------- */
+    .peto-item { font-size: 35px; cursor: pointer; transition: transform 0.3s; user-select: none; display: inline-block; }
+    .peto-item:hover { transform: scale(1.4) rotate(15deg); }
 
     @media screen and (max-width: 600px) {
       .timeline::after { left: 31px; }
@@ -167,7 +171,7 @@
   <h1>Feliç Aniversari ❤️</h1>
 
   <div id="tiempo-juntos">
-    <p id="titulo-contador" style="margin:0; color:#ff4d6d;">Comptant...</p>
+    <p id="titulo-contador" style="margin:0; color:#ff4d6d;">Portem junts:</p>
     <h2 id="reloj" style="margin:5px 0;"></h2>
   </div>
 
@@ -183,10 +187,20 @@
   </div>
 
   <div class="timeline">
-    <div class="container-timeline left"><div class="foto-container"><img src="Foto1.jpg" alt="Foto 1"><p>BARÇAAAA 💙❤️</p></div></div>
-    <div class="container-timeline right"><div class="foto-container"><img src="Foto3.jpg" alt="Foto 3"><p>Un dels dies més feliços ❤️</p></div></div>
-    <div class="container-timeline left"><div class="foto-container"><img src="Foto2.jpg" alt="Foto 2"><p>El nostre primer viatge 🌍</p></div></div>
-    <div class="container-timeline right"><div class="foto-container"><img src="Foto4.jpg" alt="Foto 4"><p>Moments inoblidables 💫</p></div></div>
+    <div class="container-timeline left">
+      <div class="foto-container">
+        <img src="miniatura.jpg" onerror="this.src='https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=300'" alt="Moment màgic">
+        <a href="https://drive.google.com/file/d/118xZ2Wf9Et0T-MKzw_zE4KN3fJTATzt9/view?usp=sharing" target="_blank" class="btn-video">
+          ▶️ CLICA PER VEURE EL VÍDEO
+        </a>
+        <p>Un moment màgic 🎥❤️</p>
+      </div>
+    </div>
+
+    <div class="container-timeline right"><div class="foto-container"><img src="Foto1.jpg" alt="Foto 1"><p>BARÇAAAA 💙❤️</p></div></div>
+    <div class="container-timeline left"><div class="foto-container"><img src="Foto3.jpg" alt="Foto 3"><p>Un dels dies més feliços ❤️</p></div></div>
+    <div class="container-timeline right"><div class="foto-container"><img src="Foto2.jpg" alt="Foto 2"><p>El nostre primer viatge 🌍</p></div></div>
+    <div class="container-timeline left"><div class="foto-container"><img src="Foto4.jpg" alt="Foto 4"><p>Moments inoblidables 💫</p></div></div>
   </div>
 
   <h2 style="color: #ff4d6d; margin-top: 40px;">Missatges que guardo ✨</h2>
@@ -215,6 +229,10 @@
     </div>
   </div>
 
+  <h2 style="color: #ff4d6d; margin-top: 50px;">El Mur dels Petons 💋</h2>
+  <p style="color: #888; font-size: 14px;">Clica un petó per rebre un missatge...</p>
+  <div id="mur-petons"></div>
+
   <div id="sobre" onclick="abrirCarta()">✉️</div>
 
   <div id="carta-texto">
@@ -223,7 +241,7 @@
   </div>
 
   <script>
-    const fechaInicio = new Date(2025, 3, 1);
+    const fechaInicio = new Date(2025, 2, 1); // Gener és 0, Febrer és 1, Març és 2
     function actualizarReloj() {
       const ahora = new Date();
       const dif = ahora - fechaInicio;
@@ -251,6 +269,16 @@
       }, 40);
     }
     animarKms();
+
+    // LÒGICA MUR DE PETONS
+    const mur = document.getElementById('mur-petons');
+    for (let i = 0; i < 12; i++) {
+      const span = document.createElement('span');
+      span.innerHTML = '💋';
+      span.className = 'peto-item';
+      span.onclick = function() { alert("❤️ Ets l'amor de la meva vida ❤️"); };
+      mur.appendChild(span);
+    }
 
     function abrirCarta() {
       const c = document.getElementById("carta-texto");
