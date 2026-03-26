@@ -69,9 +69,7 @@
     .foto-container {
       background: white; padding: 10px; border: 1px solid #ddd;
       box-shadow: 0 10px 20px rgba(0,0,0,0.1); display: inline-block; width: 100%; max-width: 280px;
-      transition: transform 0.3s ease;
     }
-    .foto-container:hover { transform: scale(1.02); }
     
     .foto-container img { 
       width: 100%; 
@@ -80,17 +78,17 @@
       background: #eee; 
     }
 
-    /* Estil botó reproducció */
-    .btn-play {
+    /* Botó rosa xulo */
+    .btn-video {
       background: #ff4d6d;
-      color: white;
-      padding: 8px;
-      font-size: 12px;
-      border-radius: 5px;
-      margin-top: 10px;
-      display: block;
+      color: white !important;
       text-decoration: none;
+      padding: 10px;
+      border-radius: 10px;
+      display: block;
+      margin-top: 10px;
       font-weight: bold;
+      font-size: 14px;
     }
 
     /* --- ESTILO NOTAS QUE GIRAN --- */
@@ -137,7 +135,7 @@
   <h1>Feliç Aniversari ❤️</h1>
 
   <div id="tiempo-juntos">
-    <p id="titulo-contador" style="margin:0; color:#ff4d6d;">Comptant...</p>
+    <p id="titulo-contador" style="margin:0; color:#ff4d6d;">Portem junts:</p>
     <h2 id="reloj" style="margin:5px 0;"></h2>
   </div>
 
@@ -153,12 +151,11 @@
   </div>
 
   <div class="timeline">
+    
     <div class="container-timeline left">
       <div class="foto-container">
-        <a href="Video1.mp4" target="_blank" style="text-decoration: none; color: inherit;">
-            <img src="miniatura-video.jpg" alt="Moment màgic">
-            <span class="btn-play">▶️ CLICA PER VEURE EL VÍDEO</span>
-        </a>
+        <img src="miniatura-video.jpg" onerror="this.src='https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=300'" alt="Moment màgic">
+        <a href="Video1.mp4" target="_blank" class="btn-video">▶️ CLICA PER OBRIR EL VÍDEO</a>
         <p>Un moment màgic 🎥❤️</p>
       </div>
     </div>
@@ -178,13 +175,11 @@
   </div>
 
   <h2 style="color: #ff4d6d; margin-top: 40px;">Missatges que guardo ✨</h2>
-  <p style="font-size: 12px; color: #888;">(Passa el ratolí o toca la nota per veure el que vam dir)</p>
-  
   <div id="muro-mensajes">
     <div class="flip-card">
       <div class="flip-card-inner">
         <div class="flip-card-front">"Vols que anem al Camp Nou?" 🏟️</div>
-        <div class="flip-card-back">"I tant! Amb tu a queller lloc" ❤️</div>
+        <div class="flip-card-back">"I tant! Amb tu a qualsevol lloc" ❤️</div>
       </div>
     </div>
     <div class="flip-card">
@@ -193,38 +188,28 @@
         <div class="flip-card-back">"Ets la millor sorpresa del món" 🌹</div>
       </div>
     </div>
-    <div class="flip-card">
-      <div class="flip-card-inner">
-        <div class="flip-card-front">"T'agrada el wuchu?" 🧸</div>
-        <div class="flip-card-back">"M'encanta, com tu!" ✨</div>
-      </div>
-    </div>
   </div>
 
   <div id="sobre" onclick="abrirCarta()">✉️</div>
-
   <div id="carta-texto">
     <h3>Per a la meva nena ❤️</h3>
     <p>Ets la millor. T'estimo moltíssim!</p>
   </div>
 
   <script>
-    // RELOTGE
-    const fechaInicio = new Date(2025, 3, 1);
+    const fechaInicio = new Date(2025, 2, 26); // Ajustat a la data actual aprox.
     function actualizarReloj() {
       const ahora = new Date();
       const dif = ahora - fechaInicio;
-      const dias = Math.floor(Math.abs(dif) / (1000 * 60 * 60 * 24));
-      const horas = Math.floor((Math.abs(dif) / (1000 * 60 * 60)) % 24);
-      const mins = Math.floor((Math.abs(dif) / 1000 / 60) % 60);
-      const segs = Math.floor((Math.abs(dif) / 1000) % 60);
+      const dias = Math.floor(dif / (1000 * 60 * 60 * 24));
+      const horas = Math.floor((dif / (1000 * 60 * 60)) % 24);
+      const mins = Math.floor((dif / 1000 / 60) % 60);
+      const segs = Math.floor((dif / 1000) % 60);
       document.getElementById('reloj').innerText = dias + "d " + horas + "h " + mins + "m " + segs + "s";
-      document.getElementById('titulo-contador').innerText = dif < 0 ? "Falten per al nostre dia:" : "Portem junts:";
     }
     setInterval(actualizarReloj, 1000);
     actualizarReloj();
 
-    // KMS
     const kmsTotales = 78; 
     let contadorKms = 0;
     function animarKms() {
@@ -237,14 +222,11 @@
     }
     animarKms();
 
-    // CARTA
     function abrirCarta() {
       const c = document.getElementById("carta-texto");
       c.style.display = c.style.display === "block" ? "none" : "block";
-      if(c.style.display === "block") c.scrollIntoView({behavior:'smooth'});
     }
 
-    // CORAZONES
     setInterval(() => {
       const cor = document.createElement("div");
       cor.className = "corazon-caida";
@@ -256,6 +238,5 @@
       setTimeout(() => cor.remove(), 5000);
     }, 500);
   </script>
-
 </body>
 </html>
