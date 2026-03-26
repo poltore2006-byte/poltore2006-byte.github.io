@@ -70,7 +70,14 @@
       background: white; padding: 10px; border: 1px solid #ddd;
       box-shadow: 0 10px 20px rgba(0,0,0,0.1); display: inline-block; width: 100%; max-width: 280px;
     }
-    .foto-container img, .foto-container video { width: 100%; height: auto; display: block; background: #eee; }
+    /* Estil per imatges i vídeos per igual */
+    .foto-container img, .foto-container video { 
+      width: 100%; 
+      height: auto; 
+      display: block; 
+      background: #eee; 
+      cursor: pointer; /* Perquè sàpiga que es pot clicar */
+    }
 
     /* --- ESTILO NOTAS QUE GIRAN --- */
     #muro-mensajes {
@@ -134,8 +141,8 @@
   <div class="timeline">
     <div class="container-timeline left">
       <div class="foto-container">
-        <video controls>
-          <source src="Video1.mp4" type="video/mp4">
+        <video controls poster="miniatura-video.jpg">
+          <source src="vostre-video.mp4" type="video/mp4">
           El teu navegador no suporta vídeos.
         </video>
         <p>Un moment màgic 🎥❤️</p>
