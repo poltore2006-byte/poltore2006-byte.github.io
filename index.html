@@ -89,10 +89,6 @@
       margin-top: 10px;
       font-weight: bold;
       font-size: 14px;
-      transition: background 0.3s;
-    }
-    .btn-video:hover {
-      background: #ff1a4a;
     }
 
     /* --- ESTILO NOTAS QUE GIRAN --- */
@@ -158,8 +154,12 @@
     
     <div class="container-timeline left">
       <div class="foto-container">
-        <img src="miniatura-video.jpg" onerror="this.src='https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=300'" alt="Moment màgic">
-        <a href="Video1.mp4" target="_blank" download="Video1.mp4" class="btn-video">▶️ CLICA PER OBRIR EL VÍDEO</a>
+        <img src="miniatura-video.jpg.jpeg" onerror="this.src='https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=300'" alt="Moment màgic">
+        
+        <a href="https://drive.google.com/file/d/118xZ2Wf9Et0T-MKzw_zE4KN3fJTATzt9/view?usp=drive_link" target="_blank" class="btn-video">
+          ▶️ CLICA PER VEURE EL VÍDEO
+        </a>
+        
         <p>Un moment màgic 🎥❤️</p>
       </div>
     </div>
@@ -201,7 +201,10 @@
   </div>
 
   <script>
-    const fechaInicio = new Date(2024, 3, 1); // He posat una data d'exemple (Abril 2024) perquè el comptador surti real
+    // Configura aquí la data en que vau començar (Any, Mes-1, Dia)
+    // Exemple: 1 de Març de 2025 és (2025, 2, 1)
+    const fechaInicio = new Date(2025, 2, 1); 
+
     function actualizarReloj() {
       const ahora = new Date();
       const dif = ahora - fechaInicio;
