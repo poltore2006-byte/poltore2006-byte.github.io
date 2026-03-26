@@ -151,6 +151,7 @@
       padding: 10px 20px; border-radius: 20px; cursor: pointer;
       transition: 0.3s; width: 100%; max-width: 250px; font-weight: bold;
       font-family: 'Comic Sans MS', cursive, sans-serif;
+      margin-bottom: 5px;
     }
     .btn-quiz:hover { background-color: #ff4d6d; color: white; }
 
@@ -222,54 +223,13 @@
   <p style="font-size: 12px; color: #888;">(Passa el ratolí o toca la nota per veure el que vam dir)</p>
   
   <div id="muro-mensajes">
-    <div class="flip-card">
-      <div class="flip-card-inner">
-        <div class="flip-card-front">"Tu crees que podrías llegar a ser cariñosa cn migo algún día??? Porque creo que se dicho que te cuesta más cn la gente que no es tu familia" </div>
-        <div class="flip-card-back">"yooo creooo que siiii la verdadd, algun dia que me pilles majaa" ❤️</div>
-      </div>
-    </div>
-
-    <div class="flip-card">
-      <div class="flip-card-inner">
-        <div class="flip-card-front">"TAlguna vez no as tenido ganas d darme un abrazo o algo JAJAJSJSJ" 🎁</div>
-        <div class="flip-card-back">"pues siiiiii" 🌹</div>
-      </div>
-    </div>
-
-    <div class="flip-card">
-      <div class="flip-card-inner">
-        <div class="flip-card-front">"y yo porq crees que vengooo" </div>
-        <div class="flip-card-back">"paraaa verteeee chochon" ✨</div>
-      </div>
-    </div>
-
-    <div class="flip-card">
-      <div class="flip-card-inner">
-        <div class="flip-card-front">"LAIAA, TESTIMO" </div>
-        <div class="flip-card-back">"AIIIIIIII PARAAAA 😭😭😭🥹, JOOO TAMBEEEE, MOOOLTT" </div>
-      </div>
-    </div>
-
-    <div class="flip-card">
-      <div class="flip-card-inner">
-        <div class="flip-card-front">"aiiii pues si tu eres feliz yo tmBien JAJAJAJAJAJAJAJ" </div>
-        <div class="flip-card-back">"Muy cursi por tu parte peor me a encantado ❤️❤️" ✨</div>
-      </div>
-    </div>
-    
-    <div class="flip-card">
-      <div class="flip-card-inner">
-        <div class="flip-card-front">"ETS la millor persona que e conegut mai,  em fas sentir el noi mes feliz enserio" </div>
-        <div class="flip-card-back">"Jolines pol que lloro, i tu tambien, Me haces muy feliz" </div>
-      </div>
-    </div>
-
-    <div class="flip-card">
-      <div class="flip-card-inner">
-        <div class="flip-card-front">"TESTIMU MOLT LAIA, Mai em cansaré d dirho" </div>
-        <div class="flip-card-back">"Joooo tambe testimo molt ❤️❤️🥹🥹" </div>
-      </div>
-    </div>
+    <div class="flip-card"><div class="flip-card-inner"><div class="flip-card-front">"Tu crees que podrías llegar a ser cariñosa cn migo algún día???" </div><div class="flip-card-back">"yooo creooo que siiii la verdadd" ❤️</div></div></div>
+    <div class="flip-card"><div class="flip-card-inner"><div class="flip-card-front">"TAlguna vez no as tenido ganas d darme un abrazo..." 🎁</div><div class="flip-card-back">"pues siiiiii" 🌹</div></div></div>
+    <div class="flip-card"><div class="flip-card-inner"><div class="flip-card-front">"y yo porq crees que vengooo" </div><div class="flip-card-back">"paraaa verteeee chochon" ✨</div></div></div>
+    <div class="flip-card"><div class="flip-card-inner"><div class="flip-card-front">"LAIAA, TESTIMO" </div><div class="flip-card-back">"AIIIIIIII PARAAAA 😭😭😭, JOOO TAMBEEEE" </div></div></div>
+    <div class="flip-card"><div class="flip-card-inner"><div class="flip-card-front">"aiiii pues si tu eres feliz yo tmBien" </div><div class="flip-card-back">"Muy cursi por tu parte peor me a encantado ❤️❤️" ✨</div></div></div>
+    <div class="flip-card"><div class="flip-card-inner"><div class="flip-card-front">"ETS la millor persona que e conegut mai..." </div><div class="flip-card-back">"Jolines pol que lloro, Me haces muy feliz" </div></div></div>
+    <div class="flip-card"><div class="flip-card-inner"><div class="flip-card-front">"TESTIMU MOLT LAIA, Mai em cansaré d dirho" </div><div class="flip-card-back">"Joooo tambe testimo molt ❤️❤️🥹🥹" </div></div></div>
   </div>
 
   <h2 style="color: #ff4d6d; margin-top: 50px;">El Mur dels Petons 💋</h2>
@@ -278,13 +238,10 @@
 
   <div id="minijoc">
     <h3 style="color: #ff4d6d; margin-bottom: 15px;">🎮 Joc: Endevina el moment!</h3>
-    <p id="pregunta" style="font-weight: bold; margin-bottom: 20px;">Quina de les tres és el que mes magrada de tu?</p>
+    <p id="pregunta" style="font-weight: bold; margin-bottom: 20px;"></p>
     
-    <div style="display: flex; flex-direction: column; gap: 10px; align-items: center;">
-      <button class="btn-quiz" onclick="comprovar(false)">Els Teus peuets</button>
-      <button class="btn-quiz" onclick="comprovar(true)">La teva careta</button>
-      <button class="btn-quiz" onclick="comprovar(false)">El teu caracter</button>
-    </div>
+    <div id="opcions" style="display: flex; flex-direction: column; gap: 10px; align-items: center;">
+      </div>
 
     <p id="resultat-quiz" style="margin-top: 20px; font-weight: bold; min-height: 24px;"></p>
   </div>
@@ -297,7 +254,8 @@
   </div>
 
   <script>
-    const fechaInicio = new Date(2025, 3, 1); // Gener és 0, Febrer és 1, Març és 2
+    // --- CONTADOR I ALTRES LÒGIQUES (Mantingudes) ---
+    const fechaInicio = new Date(2025, 3, 1);
     function actualizarReloj() {
       const ahora = new Date();
       const dif = ahora - fechaInicio;
@@ -307,46 +265,90 @@
       const segs = Math.floor((Math.abs(dif) / 1000) % 60);
       document.getElementById('reloj').innerText = dias + "d " + horas + "h " + mins + "m " + segs + "s";
     }
-    setInterval(actualizarReloj, 1000);
-    actualizarReloj();
+    setInterval(actualizarReloj, 1000); actualizarReloj();
 
-    const kmsTotales = 78; 
-    let contadorKms = 0;
+    const kmsTotales = 78; let contadorKms = 0;
     function animarKms() {
       const elementoKms = document.getElementById("kms");
       const intervalo = setInterval(() => {
         contadorKms++;
-        if (contadorKms >= kmsTotales) {
-          elementoKms.innerText = kmsTotales;
-          clearInterval(intervalo);
-        } else {
-          elementoKms.innerText = contadorKms;
-        }
+        if (contadorKms >= kmsTotales) { elementoKms.innerText = kmsTotales; clearInterval(intervalo); }
+        else { elementoKms.innerText = contadorKms; }
       }, 40);
     }
     animarKms();
 
-    // LÒGICA MUR DE PETONS
     const mur = document.getElementById('mur-petons');
     for (let i = 0; i < 12; i++) {
       const span = document.createElement('span');
-      span.innerHTML = '💋';
-      span.className = 'peto-item';
+      span.innerHTML = '💋'; span.className = 'peto-item';
       span.onclick = function() { alert("❤️ Ets l'amor de la meva vida ❤️"); };
       mur.appendChild(span);
     }
 
-    // LÒGICA MINIJOC
+    // --- LÒGICA NOVA PER A MULTIPLES PREGUNTES ---
+    
+    // 1. AQUÍ AFEGEIXES LES TEVES PREGUNTES
+    const preguntes = [
+      {
+        p: "Quina de les tres és el que mes m'agrada de tu?",
+        r: ["Els teus peuets", "La teva careta", "El teu caràcter"],
+        correcta: 0 // La segona opció (comença a comptar des de 0)
+      },
+      {
+        p: "Quina paraule vam utilitzar per confesarnos que ens agradavem?",
+        r: ["Un Helicopter🚁", "Un avio🛩️", "Un Taxi🚕"],
+        correcta: 1
+      },
+      {
+        p: "Quin es el mote que mes m'agrada dirte?",
+        r: ["Mi wuchu", "Mi wuchu wuchu", "Awuchu awu"],
+        correcta: 0
+      }
+    ];
+
+    let preguntaActual = 0;
+
+    function carregarPregunta() {
+      const dades = preguntes[preguntaActual];
+      document.getElementById('pregunta').innerText = dades.p;
+      const contenidorOpcions = document.getElementById('opcions');
+      contenidorOpcions.innerHTML = ""; // Neteja botons anteriors
+
+      dades.r.forEach((resposta, index) => {
+        const boto = document.createElement('button');
+        boto.className = 'btn-quiz';
+        boto.innerText = resposta;
+        boto.onclick = () => comprovar(index === dades.correcta);
+        contenidorOpcions.appendChild(boto);
+      });
+    }
+
     function comprovar(esCorrecte) {
       const text = document.getElementById('resultat-quiz');
       if (esCorrecte) {
-        text.innerText = "✅ SIIII! Ets la millor! ❤️";
+        text.innerText = "✅ SIIII! ❤️";
         text.style.color = "green";
+        
+        // Espera 1.5 segons i passa a la següent pregunta
+        setTimeout(() => {
+          preguntaActual++;
+          if (preguntaActual < preguntes.length) {
+            text.innerText = "";
+            carregarPregunta();
+          } else {
+            document.getElementById('minijoc').innerHTML = "<h3 style='color:#ff4d6d'>🎉 UEEEEEE 🎉</h3><p>Ets la millor! T'estimo!</p>";
+          }
+        }, 1500);
+
       } else {
-        text.innerText = "❌ Casi... torna-ho a intentar! 😜";
+        text.innerText = "❌ WUCHUUUU... esque no m'estimas??! 😜";
         text.style.color = "red";
       }
     }
+
+    // Inicia el joc per primer cop
+    carregarPregunta();
 
     function abrirCarta() {
       const c = document.getElementById("carta-texto");
@@ -356,8 +358,7 @@
 
     setInterval(() => {
       const cor = document.createElement("div");
-      cor.className = "corazon-caida";
-      cor.innerHTML = "❤️";
+      cor.className = "corazon-caida"; cor.innerHTML = "❤️";
       cor.style.left = Math.random() * 100 + "vw";
       cor.style.fontSize = Math.random() * 20 + 10 + "px";
       cor.style.animationDuration = Math.random() * 3 + 2 + "s";
