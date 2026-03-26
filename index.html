@@ -139,6 +139,21 @@
     .peto-item { font-size: 35px; cursor: pointer; transition: transform 0.3s; user-select: none; display: inline-block; }
     .peto-item:hover { transform: scale(1.4) rotate(15deg); }
 
+    /* --- ESTILS MINIJOC --- */
+    #minijoc {
+      background: white; padding: 20px; border-radius: 20px;
+      max-width: 400px; margin: 40px auto;
+      border: 2px dashed #ff4d6d;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+    }
+    .btn-quiz {
+      background-color: white; border: 2px solid #ff4d6d; color: #ff4d6d;
+      padding: 10px 20px; border-radius: 20px; cursor: pointer;
+      transition: 0.3s; width: 100%; max-width: 250px; font-weight: bold;
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+    }
+    .btn-quiz:hover { background-color: #ff4d6d; color: white; }
+
     @media screen and (max-width: 600px) {
       .timeline::after { left: 31px; }
       .container-timeline { width: 100%; padding-left: 70px; padding-right: 20px; text-align: left; }
@@ -261,6 +276,19 @@
   <p style="color: #888; font-size: 14px;">Clica un petó per rebre un missatge...</p>
   <div id="mur-petons"></div>
 
+  <div id="minijoc">
+    <h3 style="color: #ff4d6d; margin-bottom: 15px;">🎮 Joc: Endevina el moment!</h3>
+    <p id="pregunta" style="font-weight: bold; margin-bottom: 20px;">On va ser la nostra primera cita oficial?</p>
+    
+    <div style="display: flex; flex-direction: column; gap: 10px; align-items: center;">
+      <button class="btn-quiz" onclick="comprovar(false)">Al cinema 🍿</button>
+      <button class="btn-quiz" onclick="comprovar(true)">Sopant a BCN 🍝</button>
+      <button class="btn-quiz" onclick="comprovar(false)">Passejant pel parc 🌳</button>
+    </div>
+
+    <p id="resultat-quiz" style="margin-top: 20px; font-weight: bold; min-height: 24px;"></p>
+  </div>
+
   <div id="sobre" onclick="abrirCarta()">✉️</div>
 
   <div id="carta-texto">
@@ -306,6 +334,18 @@
       span.className = 'peto-item';
       span.onclick = function() { alert("❤️ Ets l'amor de la meva vida ❤️"); };
       mur.appendChild(span);
+    }
+
+    // LÒGICA MINIJOC
+    function comprovar(esCorrecte) {
+      const text = document.getElementById('resultat-quiz');
+      if (esCorrecte) {
+        text.innerText = "✅ SIIII! Ets la millor! ❤️";
+        text.style.color = "green";
+      } else {
+        text.innerText = "❌ Casi... torna-ho a intentar! 😜";
+        text.style.color = "red";
+      }
     }
 
     function abrirCarta() {
