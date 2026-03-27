@@ -1,306 +1,723 @@
 <!DOCTYPE html>
+
 <html lang="es">
+
 <head>
+
   <meta charset="UTF-8">
+
   <title>Feliç Aniversari ❤️</title>
 
+
+
   <style>
+
     body {
+
       margin: 0;
+
       font-family: 'Comic Sans MS', cursive, sans-serif;
+
       background: linear-gradient(135deg, #fff0f3 0%, #ffdde1 100%);
+
       background-attachment: fixed;
+
       text-align: center;
+
       overflow-x: hidden;
+
       min-height: 100vh;
+
       display: flex;
+
       flex-direction: column;
+
       align-items: center;
+
     }
+
+
 
     h1 { color: #ff4d6d; padding: 20px; margin: 0; }
 
+
+
     #btn-musica {
+
       background: #ff4d6d;
+
       color: white;
+
       border: none;
+
       padding: 10px 20px;
+
       border-radius: 20px;
+
       font-weight: bold;
+
       cursor: pointer;
+
       margin-bottom: 20px;
+
       box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+
     }
 
+
+
     #tiempo-juntos, #capsula-distancia, .foto-container, #minijoc, #seccio-panic, #maquina-temps {
+
       background: white;
+
       padding: 15px;
+
       border-radius: 15px;
+
       display: block; 
+
       width: 90%;
+
       max-width: 450px; 
+
       margin: 20px auto;
+
       box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+
       box-sizing: border-box;
+
     }
+
+
 
     #kms { font-size: 28px; font-weight: bold; color: #ff4d6d; }
 
-    /* TIMELINE MILLORADA */
-    .timeline { position: relative; width: 100%; max-width: 800px; margin: 40px auto; padding-bottom: 20px; }
+
+
+    /* TIMELINE */
+
+    .timeline { position: relative; width: 100%; max-width: 600px; margin: 20px auto; padding-bottom: 20px; }
+
     .timeline::after {
-      content: ''; position: absolute; width: 4px; background-color: #ff4d6d;
-      top: 0; bottom: 0; left: 50%; margin-left: -2px; z-index: 1;
+
+      content: ''; position: absolute; width: 6px; background-color: #ff4d6d;
+
+      top: 0; bottom: 0; left: 50%; margin-left: -3px;
+
     }
-    .container-timeline { padding: 20px 40px; position: relative; width: 50%; box-sizing: border-box; z-index: 2; }
+
+    .container-timeline { padding: 20px 40px; position: relative; width: 50%; box-sizing: border-box; }
+
     .left { left: 0; text-align: right; }
+
     .right { left: 50%; text-align: left; }
-    
-    /* El cor de la línia */
-    .container-timeline::after { 
-      content: '❤️'; position: absolute; font-size: 18px;
-      right: -13px; top: 40px; z-index: 10; background: #fff0f3; border-radius: 50%;
-    }
-    .right::after { left: -13px; }
 
-    /* Estil Polaroid per a la Timeline */
-    .foto-container {
-      background: white !important;
-      padding: 10px 10px 25px 10px !important;
-      border-radius: 2px !important;
-      box-shadow: 5px 5px 15px rgba(0,0,0,0.15) !important;
-      transition: transform 0.3s ease;
-      display: inline-block;
-      width: 100%;
-    }
-    .left .foto-container { transform: rotate(-3deg); }
-    .right .foto-container { transform: rotate(3deg); }
-    
-    .foto-container:hover {
-      transform: scale(1.1) rotate(0deg) !important;
-      z-index: 20;
-      box-shadow: 10px 10px 25px rgba(0,0,0,0.3) !important;
-    }
+    .container-timeline::after { content: '❤️'; position: absolute; width: 25px; height: 25px; right: -14px; top: 30px; z-index: 10; }
 
-    .foto-container img { width: 100%; height: auto; display: block; border: 1px solid #eee; margin-bottom: 10px; }
-    .foto-container p { margin: 5px 0 0 0; font-weight: bold; font-size: 13px; color: #333; }
+    .right::after { left: -14px; }
+
+
+
+    .foto-container img { width: 100%; height: auto; display: block; background: #eee; border-radius: 10px; }
 
     .btn-video { 
+
       background: #ff4d6d; color: white !important; text-decoration: none; 
-      padding: 10px; border-radius: 8px; display: block; margin: 10px 0; 
-      font-weight: bold; font-size: 12px; border: none; cursor: pointer;
+
+      padding: 12px; border-radius: 10px; display: block; margin-top: 10px; 
+
+      font-weight: bold; font-size: 14px; border: none; cursor: pointer;
+
     }
+
+
 
     /* MISSATGES FLIP CARDS */
+
     #muro-mensajes { display: flex; flex-direction: column; align-items: center; gap: 20px; padding: 20px; width: 100%; }
+
     .flip-card { background-color: transparent; width: 280px; height: 120px; perspective: 1000px; }
+
     .flip-card-inner { position: relative; width: 100%; height: 100%; text-align: center; transition: transform 0.8s; transform-style: preserve-3d; box-shadow: 5px 5px 15px rgba(0,0,0,0.1); border-radius: 10px; }
+
     .flip-card:hover .flip-card-inner { transform: rotateY(180deg); }
+
     .flip-card-front, .flip-card-back { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; display: flex; align-items: center; justify-content: center; padding: 15px; box-sizing: border-box; border-radius: 10px; font-weight: bold; font-size: 14px; }
+
     .flip-card-front { background-color: #fff9c4; color: #333; }
+
     .flip-card-back { background-color: #f8bbd0; color: #333; transform: rotateY(180deg); }
 
+
+
     /* CÀPSULA DEL TEMPS (FONS FUSTA) */
+
     #capsula-records {
+
       width: 95%; max-width: 550px; height: 420px; margin: 20px auto;
+
       position: relative; 
+
       background-color: #6d4c41;
+
       background-image: repeating-linear-gradient(90deg, transparent, transparent 50px, rgba(0,0,0,0.05) 50px, rgba(0,0,0,0.05) 100px);
+
       border-radius: 20px;
+
       border: 8px double #3e2723; 
+
       box-shadow: inset 0 0 50px rgba(0,0,0,0.5);
+
       overflow: hidden;
+
     }
+
     .polaroid {
+
       position: absolute; background: white; padding: 10px 10px 20px 10px;
+
       box-shadow: 5px 5px 15px rgba(0,0,0,0.4); border-radius: 2px;
+
       width: 115px; cursor: pointer; transition: all 0.5s ease-in-out; z-index: 1;
+
     }
+
     .polaroid img { width: 100%; height: 95px; object-fit: cover; border: 1px solid #ddd; }
+
     .polaroid p { margin: 8px 0 0 0; font-size: 10px; color: #333; text-align: center; font-weight: bold; }
+
     
+
     .polaroid:hover {
+
       transform: rotate(0deg) scale(1.6) !important;
+
       top: 50% !important; left: 50% !important;
+
       margin-top: -85px !important; margin-left: -60px !important;
+
       box-shadow: 15px 15px 35px rgba(0,0,0,0.6); z-index: 100;
+
     }
+
+
 
     /* ALTRES SECCIONS */
+
     #maquina-temps { background: #333; border: 5px solid #ff4d6d; }
+
     .pantalla-futur {
+
       background: #1a1a1a; color: #00ff41; padding: 20px; border-radius: 10px;
+
       min-height: 80px; display: flex; align-items: center; justify-content: center;
+
       font-family: 'Courier New', Courier, monospace; border: 2px solid #444; margin-bottom: 20px;
+
     }
+
     .btn-any { background: #ff4d6d; color: white; border: none; padding: 10px 15px; border-radius: 5px; cursor: pointer; font-weight: bold; margin: 5px; }
+
     .btn-quiz { background-color: white; border: 2px solid #ff4d6d; color: #ff4d6d; padding: 10px 20px; border-radius: 20px; cursor: pointer; width: 100%; font-weight: bold; margin-bottom: 10px; }
+
     #sobre { font-size: 80px; cursor: pointer; margin: 50px 0; }
+
     #carta-texto { display: none; background: #fffbe6; padding: 20px; width: 90%; max-width: 450px; margin: 20px auto; border-radius: 10px; border: 1px solid #f0e68c; }
+
     .corazon-caida { position: fixed; top: -10vh; z-index: 999; animation: caer linear forwards; }
+
     @keyframes caer { 0% { transform: translateY(-10vh); opacity: 1; } 100% { transform: translateY(110vh); opacity: 0; } }
 
+
+
     @media screen and (max-width: 600px) {
+
       .timeline::after { left: 31px; }
+
       .container-timeline { width: 100%; padding-left: 70px; text-align: left; }
+
       .container-timeline::after { left: 18px; }
+
       .right { left: 0%; }
+
     }
+
   </style>
+
 </head>
+
+
 
 <body>
 
+
+
   <h1>Feliç Aniversari ❤️</h1>
+
+
 
   <button id="btn-musica" onclick="iniciarMusica()">Activa la nostra música 🎵</button>
 
+
+
   <div id="tiempo-juntos">
+
     <p style="margin:0; color:#ff4d6d;">Portem junts:</p>
+
     <h2 id="reloj" style="margin:5px 0;"></h2>
+
   </div>
+
+
 
   <div id="capsula-distancia">
+
     <p style="margin: 0; font-size: 14px; color: #ff4d6d; font-weight: bold;">DISTÀNCIA PER VEURE'T 🚗💨</p>
+
     <div style="display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: 5px;">
+
       <span id="kms">0</span> <span style="font-size: 18px; color: #555;">km totals</span>
+
     </div>
+
     <p style="font-size: 12px; color: #888; margin-top: 5px;">Sant Sadurní ➔ BCN ➔ Terrassa</p>
+
   </div>
+
+
 
   <div class="timeline">
+
     <div class="container-timeline left">
+
       <div class="foto-container">
+
         <img src="miniatura.jpg" onerror="this.src='https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=300'" alt="Moment màgic">
+
         <a href="https://drive.google.com/file/d/118xZ2Wf9Et0T-MKzw_zE4KN3fJTATzt9/view?usp=sharing" target="_blank" class="btn-video">▶️ CLICA PER VEURE EL VÍDEO</a>
+
         <p>Un moment màgic 🎥❤️</p>
+
       </div>
+
     </div>
+
     <div class="container-timeline right"><div class="foto-container"><img src="Linea1.jpg" alt="Foto 1"><p>MI CHAMPIONS 💙❤️</p></div></div>
+
     <div class="container-timeline left"><div class="foto-container"><img src="Linea2.jpg" alt="Foto 2"><p>El primer dia que et vaig acompanyar a casa</p></div></div>
+
     <div class="container-timeline right"><div class="foto-container"><img src="Linea3.jpg" alt="Foto 3"><p>Evitant lo inevitable</p></div></div>
+
     <div class="container-timeline left"><div class="foto-container"><img src="Linea4.jpg" alt="Foto 4"><p>La nostre primera CITAAA 💫</p></div></div>
+
     <div class="container-timeline right"><div class="foto-container"><img src="Linea5.jpg" alt="Foto 5"><p>Un altre moment especial ✨</p></div></div>
+
     <div class="container-timeline left"><div class="foto-container"><img src="Linea6.jpg" alt="Foto 6"><p>Sempre al teu costat 🌹</p></div></div>
+
     <div class="container-timeline right"><div class="foto-container"><img src="Linea7.jpg" alt="Foto 7"><p>Rialles infinites amb tu 😂❤️</p></div></div>
+
     <div class="container-timeline left"><div class="foto-container"><img src="Linea8.jpg" alt="Foto 8"><p>Ets la meva millor aventura 🌍</p></div></div>
+
     
+
     <div class="container-timeline right">
+
       <div class="foto-container">
+
         <img src="Linea9.jpg" alt="Foto 9">
+
         <a href="https://drive.google.com/file/d/1ukHUOknf-Pj7Le3hLyY_K4bldlNmsx2l/view?usp=drive_link" target="_blank" class="btn-video">▶️ CLICA PER VEURE EL VÍDEO</a>
+
         <p>Per molts més records junts! 🥂</p>
+
       </div>
+
     </div>
+
     <div class="container-timeline left"><div class="foto-container"><img src="Linea10.jpg" alt="Foto 10"><p>Ets increïble! 😍</p></div></div>
+
     <div class="container-timeline right"><div class="foto-container"><img src="Linea11.jpg" alt="Foto 11"><p>Gràcies per cada segon ✨</p></div></div>
+
     <div class="container-timeline left"><div class="foto-container"><img src="Linea12.jpg" alt="Foto 12"><p>T'estimo infinitament ❤️</p></div></div>
+
     <div class="container-timeline right"><div class="foto-container"><img src="Linea13.jpg" alt="Foto 13"><p>Un altre record inoblidable 📸</p></div></div>
+
     <div class="container-timeline left"><div class="foto-container"><img src="Linea14.jpg" alt="Foto 14"><p>Sempre rient junts! 😊</p></div></div>
+
     <div class="container-timeline right"><div class="foto-container"><img src="Linea15.jpg" alt="Foto 15"><p>Per a tota la vida ♾️❤️</p></div></div>
+
     <div class="container-timeline left"><div class="foto-container"><img src="Linea16.jpg" alt="Foto 16"><p>Un altre record inoblidable 📸</p></div></div>
+
     <div class="container-timeline right"><div class="foto-container"><img src="Linea17.jpg" alt="Foto 17"><p>Sempre rient junts! 😊</p></div></div>
+
     <div class="container-timeline left"><div class="foto-container"><img src="Linea18.jpg" alt="Foto 18"><p>Per a tota la vida ♾️❤️</p></div></div>
 
+
+
      <div class="container-timeline right">
+
       <div class="foto-container">
+
         <img src="miniatura.jpg" onerror="this.src='https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=300'" alt="Moment màgic">
+
         <a href="https://drive.google.com/file/d/1_rmWzNgok0Q9bZ_B048MnuAxG9m-SUCN/view?usp=drive_link" target="_blank" class="btn-video">▶️ CLICA PER VEURE EL VÍDEO</a>
+
         <p>Un moment màgic 🎥❤️</p>
+
       </div>
+
     </div>
 
+
+
     <div class="container-timeline left"><div class="foto-container"><img src="Linea19.jpg" alt="Foto 19"><p>Sempre rient junts! 😊</p></div></div>
+
     <div class="container-timeline right"><div class="foto-container"><img src="Linea20.jpg" alt="Foto 20"><p>Per a tota la vida ♾️❤️</p></div></div>
+
     <div class="container-timeline left"><div class="foto-container"><img src="Linea21.jpg" alt="Foto 21"><p>Un altre record inoblidable 📸</p></div></div>
+
     <div class="container-timeline right"><div class="foto-container"><img src="Linea22.jpg" alt="Foto 22"><p>Sempre rient junts! 😊</p></div></div>
+
     <div class="container-timeline left"><div class="foto-container"><img src="Linea23.jpg" alt="Foto 23"><p>Per a tota la vida ♾️❤️</p></div></div>
+
     <div class="container-timeline right"><div class="foto-container"><img src="Linea24.jpg" alt="Foto 24"><p>Sempre rient junts! 😊</p></div></div>
+
     <div class="container-timeline left"><div class="foto-container"><img src="Linea245.jpg" alt="Foto 245"><p>Per a tota la vida ♾️❤️</p></div></div>
+
     <div class="container-timeline right"><div class="foto-container"><img src="Linea25.jpg" alt="Foto 25"><p>Un altre record inoblidable 📸</p></div></div>
+
     <div class="container-timeline left"><div class="foto-container"><img src="Linea26.jpg" alt="Foto 26"><p>Sempre rient junts! 😊</p></div></div>
+
     <div class="container-timeline right"><div class="foto-container"><img src="Linea27.jpg" alt="Foto 27"><p>Per a tota la vida ♾️❤️</p></div></div>
+
     <div class="container-timeline left"><div class="foto-container"><img src="Linea28.jpg" alt="Foto 28"><p>Sempre rient junts! 😊</p></div></div>
+
   </div>
+
+
 
   <h2 style="color: #ff4d6d; margin-top: 40px;">Missatges que guardo ✨</h2>
+
   <div id="muro-mensajes">
+
     <div class="flip-card"><div class="flip-card-inner"><div class="flip-card-front">"Tu crees que podrías llegar a ser cariñosa cn migo algún día???" </div><div class="flip-card-back">"yooo creooo que siiii la verdadd" ❤️</div></div></div>
+
     <div class="flip-card"><div class="flip-card-inner"><div class="flip-card-front">"TAlguna vez no as tenido ganas d darme un abrazo..." 🎁</div><div class="flip-card-back">"pues siiiiii" 🌹</div></div></div>
+
     <div class="flip-card"><div class="flip-card-inner"><div class="flip-card-front">"y yo porq crees que vengooo" </div><div class="flip-card-back">"paraaa verteeee chochon" ✨</div></div></div>
+
     <div class="flip-card"><div class="flip-card-inner"><div class="flip-card-front">"LAIAA, TESTIMO" </div><div class="flip-card-back">"AIIIIIIII PARAAAA 😭😭😭, JOOO TAMBEEEE" </div></div></div>
+
     <div class="flip-card"><div class="flip-card-inner"><div class="flip-card-front">"aiiii pues si tu eres feliz yo tmBien" </div><div class="flip-card-back">"Muy cursi por tu parte peor me a encantado ❤️❤️" ✨</div></div></div>
+
     <div class="flip-card"><div class="flip-card-inner"><div class="flip-card-front">"ETS la millor persona que e conegut mai..." </div><div class="flip-card-back">"Jolines pol que lloro, Me haces muy feliz" </div></div></div>
+
     <div class="flip-card"><div class="flip-card-inner"><div class="flip-card-front">"TESTIMU MOLT LAIA, Mai em cansaré d dirho" </div><div class="flip-card-back">"Joooo tambe testimo molt ❤️❤️🥹🥹" </div></div></div> 
+
   </div>
+
+
 
   <h2 style="color: #1b4332; margin-top: 50px;">🏔️ Els Nostres Cims: </h2>
+
   <div id="capsula-records">
+
       <div style="font-size: 40px; position: absolute; top: 20px; left: 200px; opacity: 0.2;">🌲</div>
+
       <div style="font-size: 30px; position: absolute; bottom: 40px; left: 30px; opacity: 0.2;">⛰️</div>
+
       <div style="font-size: 35px; position: absolute; top: 150px; right: 40px; opacity: 0.2;">🦅</div>
 
+
+
       <div class="polaroid" style="top: 30px; left: 40px; transform: rotate(-10deg);">
+
           <img src="Montserrat.jpg" alt="Record 1">
+
           <p>Montserrat! ⛰️</p>
+
       </div>
+
       <div class="polaroid" style="top: 50px; right: 50px; transform: rotate(8deg);">
+
           <img src="MOLA.jpg" alt="Record 2">
+
           <p>La Mola ✨</p>
+
       </div>
+
       <div class="polaroid" style="bottom: 70px; left: 110px; transform: rotate(-4deg);">
+
           <img src="Molina.jpg" alt="Record 3">
+
           <p>La Molina ❄️</p>
+
       </div>
+
       <div class="polaroid" style="bottom: 30px; right: 50px; transform: rotate(15deg);">
+
           <img src="Next.jpg" alt="Record 4">
+
           <p>Next mountain?? ❓</p>
+
       </div>
+
   </div>
+
+
 
   <div id="minijoc">
+
     <h3 style="color: #ff4d6d;">🎮 Joc: Endevina el moment!</h3>
+
     <p id="pregunta" style="font-weight: bold;"></p>
+
     <div id="opcions" style="display: flex; flex-direction: column; gap: 10px; align-items: center;"></div>
+
     <p id="resultat-quiz" style="margin-top: 20px; font-weight: bold; min-height: 24px;"></p>
+
   </div>
+
+
 
   <div id="seccio-panic">
+
       <h3 style="color: #ff4d6d;">Pregunta seriosa... 🤔</h3>
+
       <p>M'estimaràs per sempre?</p>
+
       <div style="height: 120px; position: relative; margin-top: 20px;">
+
           <button class="btn-quiz" onclick="alert('Jo també t\'estimaré sempre! ❤️')">SÍ, CLAR! 😍</button>
+
           <button id="boto-no" class="btn-quiz" style="position: absolute; left: 0;">NO 😜</button>
+
       </div>
+
   </div>
+
+
 
   <h2 style="color: #ff4d6d; margin-top: 60px;">⏳ La Màquina del Temps</h2>
+
   <div id="maquina-temps">
+
       <div class="pantalla-futur">
+
           <p id="text-futur">Selecciona un any per veure què ens depara el destí... 🚀</p>
+
       </div>
+
       <div class="botons-anys">
+
           <button class="btn-any" onclick="viureFutur(2027)">2027</button>
+
           <button class="btn-any" onclick="viureFutur(2029)">2029</button>
+
           <button class="btn-any" onclick="viureFutur(2030)">2030</button>
+
           <button class="btn-any" onclick="viureFutur(2035)">2035</button>
+
           <button class="btn-any" onclick="viureFutur(2050)">2050</button>
+
       </div>
+
   </div>
 
+
+
   <div id="sobre" onclick="abrirCarta()">✉️</div>
+
   <div id="carta-texto">
+
     <h3>Per a la meva Princesa ❤️</h3>
+
     <p>Ets la millor. T'estimo moltíssim!</p>
+
   </div>
+
+
 
   <div id="contenedor-musica"></div>
 
+
+
   <footer style="margin: 80px 0 30px 0; padding: 20px; border-top: 1px dashed #ff4d6d; opacity: 0.7;">
+
       <p style="color: #ff4d6d; font-size: 14px; font-style: italic;">Fet amb ❤️ pel Pol | 2026</p>
+
   </footer>
 
+
+
   <script>
+
     function iniciarMusica() {
+
       const contenedor = document.getElementById('contenedor-musica');
-      contenedor.innerHTML = '<iframe width="0" height="0" src="
+
+      contenedor.innerHTML = '<iframe width="0" height="0" src="https://www.youtube.com/embed/zdztQg038yc?autoplay=1&loop=1&playlist=zdztQg038yc" frameborder="0" allow="autoplay"></iframe>';
+
+      document.getElementById('btn-musica').style.display = 'none';
+
+    }
+
+
+
+    const fechaInicio = new Date(2025, 3, 1);
+
+    function actualizarReloj() {
+
+      const ahora = new Date();
+
+      const dif = ahora - fechaInicio;
+
+      const dias = Math.floor(Math.abs(dif) / (1000 * 60 * 60 * 24));
+
+      const horas = Math.floor((Math.abs(dif) / (1000 * 60 * 60)) % 24);
+
+      const mins = Math.floor((Math.abs(dif) / 1000 / 60) % 60);
+
+      const segs = Math.floor((Math.abs(dif) / 1000) % 60);
+
+      document.getElementById('reloj').innerText = dias + "d " + horas + "h " + mins + "m " + segs + "s";
+
+    }
+
+    setInterval(actualizarReloj, 1000); actualizarReloj();
+
+
+
+    let contK = 0;
+
+    const intK = setInterval(() => {
+
+      contK++;
+
+      document.getElementById("kms").innerText = contK;
+
+      if(contK >= 78) clearInterval(intK);
+
+    }, 40);
+
+
+
+    function viureFutur(any) {
+
+      const p = document.getElementById('text-futur');
+
+      let m = "";
+
+      if(any===2027) m = "📅 2027: Estarem repetint Hidrulica😭😢";
+
+      else if(any===2029) m = "🎓 2029: Ja ens haurem graduat junts!🥹";
+
+      else if(any===2030) m = "🌍 2030: Per fi a Milano! ✈️";
+
+      else if(any===2035) m = "🏠 2035: Viurem juntets i potser amb cuchis👶🏼";
+
+      else if(any===2050) m = "👴👵 2050: Dos avis feliços i enamorats. 🥰";
+
+      p.innerText = m;
+
+    }
+
+
+
+    const preguntes = [
+
+      { p: "Quina de les tres és el que mes m'agrada de tu?", r: ["Els teus peuets", "La teva careta", "El teu caràcter"], c: 0 },
+
+      { p: "Quina paraule vam utilitzar per confesarnos?", r: ["Un Helicopter🚁", "Un avio🛩️", "Un Taxi🚕"], c: 1 },
+
+      { p: "Quin es el mote que mes m'agrada dirte?", r: ["Mi wuchu", "Mi wuchu wuchu", "Awuchu awu"], c: 0 }
+
+    ];
+
+    let pAct = 0;
+
+
+
+    function carregarP() {
+
+      const d = preguntes[pAct];
+
+      const resText = document.getElementById('resultat-quiz');
+
+      if(!d) return;
+
+      document.getElementById('pregunta').innerText = d.p;
+
+      const o = document.getElementById('opcions'); o.innerHTML = ""; resText.innerText = ""; 
+
+      d.r.forEach((res, i) => {
+
+        const b = document.createElement('button'); b.className='btn-quiz'; b.innerText=res;
+
+        b.onclick = () => {
+
+          if(i === d.c) { 
+
+            resText.style.color = "green"; resText.innerText = "Molt bé, cuchi! ✨";
+
+            setTimeout(() => {
+
+                pAct++; if(pAct < preguntes.length) { carregarP(); } 
+
+                else { document.getElementById('minijoc').innerHTML="<h3>🎉 ETS LA MILLOR I HO SAPS TOT DE NOSALTRES! 🎉</h3>"; }
+
+            }, 1000);
+
+          } else { 
+
+            resText.style.color = "red"; resText.innerText = "Wuchu... m'estimes o no? 😜"; 
+
+          }
+
+        };
+
+        o.appendChild(b);
+
+      });
+
+    }
+
+    carregarP();
+
+
+
+    const bN = document.getElementById('boto-no');
+
+    bN.onmouseover = () => {
+
+      bN.style.left = Math.random()*70 + "vw";
+
+      bN.style.top = Math.random()*50 + "px";
+
+    };
+
+
+
+    function abrirCarta() { document.getElementById("carta-texto").style.display = "block"; }
+
+
+
+    setInterval(() => {
+
+      const c = document.createElement("div"); c.className = "corazon-caida"; c.innerHTML = "❤️";
+
+      c.style.left = Math.random() * 100 + "vw";
+
+      c.style.animationDuration = Math.random() * 3 + 2 + "s";
+
+      document.body.appendChild(c);
+
+      setTimeout(() => c.remove(), 5000);
+
+    }, 500);
+
+  </script>
+
+</body>
+
+</html>
