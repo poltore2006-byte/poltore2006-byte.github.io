@@ -46,7 +46,6 @@
 
     #kms { font-size: 28px; font-weight: bold; color: #ff4d6d; }
 
-    /* L'ARREGLAMENT DE LA LINIA ESTÀ AQUÍ */
     .timeline { position: relative; width: 100%; max-width: 600px; margin: 20px auto; padding-bottom: 20px; }
     .timeline::after {
       content: ''; position: absolute; width: 6px; background-color: #ff4d6d;
@@ -80,9 +79,6 @@
       font-family: 'Courier New', Courier, monospace; border: 2px solid #444; margin-bottom: 20px;
     }
     .btn-any { background: #ff4d6d; color: white; border: none; padding: 10px 15px; border-radius: 5px; cursor: pointer; font-weight: bold; margin: 5px; }
-
-    #mur-petons { display: grid; grid-template-columns: repeat(auto-fit, minmax(60px, 1fr)); gap: 15px; max-width: 400px; margin: 30px auto; padding: 20px; background: white; border-radius: 20px; }
-    .peto-item { font-size: 35px; cursor: pointer; }
 
     .btn-quiz { background-color: white; border: 2px solid #ff4d6d; color: #ff4d6d; padding: 10px 20px; border-radius: 20px; cursor: pointer; width: 100%; font-weight: bold; margin-bottom: 10px; }
 
@@ -169,13 +165,14 @@
     <div class="container-timeline left"><div class="foto-container"><img src="Linea21.jpg" alt="Foto 21"><p>Un altre record inoblidable 📸</p></div></div>
     <div class="container-timeline right"><div class="foto-container"><img src="Linea22.jpg" alt="Foto 22"><p>Sempre rient junts! 😊</p></div></div>
     <div class="container-timeline left"><div class="foto-container"><img src="Linea23.jpg" alt="Foto 23"><p>Per a tota la vida ♾️❤️</p></div></div>
-     <div class="container-timeline right"><div class="foto-container"><img src="Linea24.jpg" alt="Foto 24"><p>Sempre rient junts! 😊</p></div></div>
+    <div class="container-timeline right"><div class="foto-container"><img src="Linea24.jpg" alt="Foto 24"><p>Sempre rient junts! 😊</p></div></div>
     <div class="container-timeline left"><div class="foto-container"><img src="Linea25.jpg" alt="Foto 25"><p>Un altre record inoblidable 📸</p></div></div>
     <div class="container-timeline right"><div class="foto-container"><img src="Linea26.jpg" alt="Foto 26"><p>Sempre rient junts! 😊</p></div></div>
     <div class="container-timeline left"><div class="foto-container"><img src="Linea27.jpg" alt="Foto 27"><p>Per a tota la vida ♾️❤️</p></div></div>
-     <div class="container-timeline right"><div class="foto-container"><img src="Linea28.jpg" alt="Foto 28"><p>Sempre rient junts! 😊</p></div></div>
-    
-  </div> <h2 style="color: #ff4d6d; margin-top: 40px;">Missatges que guardo ✨</h2>
+    <div class="container-timeline right"><div class="foto-container"><img src="Linea28.jpg" alt="Foto 28"><p>Sempre rient junts! 😊</p></div></div>
+  </div>
+
+  <h2 style="color: #ff4d6d; margin-top: 40px;">Missatges que guardo ✨</h2>
   <div id="muro-mensajes">
     <div class="flip-card"><div class="flip-card-inner"><div class="flip-card-front">"Tu crees que podrías llegar a ser cariñosa cn migo algún día???" </div><div class="flip-card-back">"yooo creooo que siiii la verdadd" ❤️</div></div></div>
     <div class="flip-card"><div class="flip-card-inner"><div class="flip-card-front">"TAlguna vez no as tenido ganas d darme un abrazo..." 🎁</div><div class="flip-card-back">"pues siiiiii" 🌹</div></div></div>
@@ -186,8 +183,19 @@
     <div class="flip-card"><div class="flip-card-inner"><div class="flip-card-front">"TESTIMU MOLT LAIA, Mai em cansaré d dirho" </div><div class="flip-card-back">"Joooo tambe testimo molt ❤️❤️🥹🥹" </div></div></div>
   </div>
 
-  <h2 style="color: #ff4d6d; margin-top: 50px;">El Mur dels Petons 💋</h2>
-  <div id="mur-petons"></div>
+  <h2 style="color: #1b4332; margin-top: 50px;">🏔️ El Teu Racó de Muntanya 🌲</h2>
+  <div id="diorama-muntanya" style="background: linear-gradient(to bottom, #aaccff 0%, #e0f2fe 100%); width: 90%; max-width: 500px; height: 300px; margin: 20px auto; border-radius: 20px; position: relative; border: 4px solid #1b4332; overflow: hidden; box-shadow: 0 8px 20px rgba(0,0,0,0.2); box-sizing: border-box;">
+      <div style="width: 0; height: 0; border-left: 100px solid transparent; border-right: 100px solid transparent; border-bottom: 150px solid #2d6a4f; position: absolute; bottom: 50px; left: 50px; z-index: 1;"></div>
+      <div style="width: 0; height: 0; border-left: 120px solid transparent; border-right: 120px solid transparent; border-bottom: 180px solid #1b4332; position: absolute; bottom: 50px; left: 150px; z-index: 1;"></div>
+      <div style="background: #40916c; width: 100%; height: 60px; position: absolute; bottom: 0; left: 0; z-index: 2; border-radius: 0 0 16px 16px;"></div>
+      <div id="aguila" onclick="volarAguila()" style="font-size: 30px; position: absolute; top: 40px; left: 80%; cursor: pointer; z-index: 5; transition: all 1s ease;">🦅</div>
+      <div onclick="missatgeTenda()" style="font-size: 40px; position: absolute; bottom: 45px; left: 100px; cursor: pointer; z-index: 5;">⛺</div>
+      <div id="bafarada-tenda" style="display: none; background: white; padding: 5px 10px; border-radius: 10px; position: absolute; bottom: 95px; left: 80px; z-index: 6; font-size: 12px; border: 1px solid #ccc;">T'espero per la propera! ❤️</div>
+      <div id="marmota" onclick="saludarMarmota()" style="font-size: 25px; position: absolute; bottom: 40px; right: 80px; cursor: pointer; z-index: 5; transition: bottom 0.3s ease;">🐹</div>
+      <div style="background: #333; width: 35px; height: 15px; border-radius: 50%; position: absolute; bottom: 35px; right: 75px; z-index: 4;"></div>
+      <div id="motxilla" onclick="obrirMapa()" style="font-size: 30px; position: absolute; bottom: 40px; right: 150px; cursor: pointer; z-index: 5;">🎒</div>
+      <div id="mapa-icona" style="display: none; font-size: 20px; position: absolute; bottom: 75px; right: 155px; z-index: 6;">🗺️</div>
+  </div>
 
   <div id="minijoc">
     <h3 style="color: #ff4d6d;">🎮 Joc: Endevina el moment!</h3>
@@ -261,11 +269,29 @@
       if(contK >= 78) clearInterval(intK);
     }, 40);
 
-    const mP = document.getElementById('mur-petons');
-    for (let i = 0; i < 12; i++) {
-      const s = document.createElement('span'); s.innerHTML = '💋'; s.className = 'peto-item';
-      s.onclick = () => alert("❤️ Ets l'amor de la meva vida ❤️");
-      mP.appendChild(s);
+    // FUNCIONS DEL DIORAMA
+    function volarAguila() {
+      const aguila = document.getElementById('aguila');
+      aguila.style.left = "-50px"; aguila.style.top = "10px";
+      setTimeout(() => {
+        aguila.style.transition = "none"; aguila.style.left = "80%"; aguila.style.top = "40px";
+        setTimeout(() => aguila.style.transition = "all 1s ease", 50);
+      }, 1500);
+    }
+    function missatgeTenda() {
+      const bafarada = document.getElementById('bafarada-tenda');
+      bafarada.style.display = (bafarada.style.display === 'none') ? 'block' : 'none';
+      setTimeout(() => bafarada.style.display = 'none', 3000);
+    }
+    function saludarMarmota() {
+      const marmota = document.getElementById('marmota');
+      marmota.style.bottom = "60px";
+      setTimeout(() => marmota.style.bottom = "40px", 500);
+    }
+    function obrirMapa() {
+      const mapa = document.getElementById('mapa-icona');
+      mapa.style.display = (mapa.style.display === 'none') ? 'block' : 'none';
+      setTimeout(() => mapa.style.display = 'none', 2000);
     }
 
     function viureFutur(any) {
@@ -290,26 +316,18 @@
       const d = preguntes[pAct];
       const resText = document.getElementById('resultat-quiz');
       document.getElementById('pregunta').innerText = d.p;
-      const o = document.getElementById('opcions'); 
-      o.innerHTML = "";
-      resText.innerText = ""; 
-
+      const o = document.getElementById('opcions'); o.innerHTML = ""; resText.innerText = ""; 
       d.r.forEach((res, i) => {
-        const b = document.createElement('button'); 
-        b.className='btn-quiz'; 
-        b.innerText=res;
+        const b = document.createElement('button'); b.className='btn-quiz'; b.innerText=res;
         b.onclick = () => {
           if(i === d.c) { 
-            resText.style.color = "green";
-            resText.innerText = "Molt bé, cuchi! ✨";
+            resText.style.color = "green"; resText.innerText = "Molt bé, cuchi! ✨";
             setTimeout(() => {
-                pAct++; 
-                if(pAct < preguntes.length) { carregarP(); } 
+                pAct++; if(pAct < preguntes.length) { carregarP(); } 
                 else { document.getElementById('minijoc').innerHTML="<h3>🎉 ETS LA MILLOR I HO SAPS TOT DE NOSALTRES! 🎉</h3>"; }
             }, 1000);
           } else { 
-            resText.style.color = "red";
-            resText.innerText = "Wuchu... m'estimes o no? 😜"; 
+            resText.style.color = "red"; resText.innerText = "Wuchu... m'estimes o no? 😜"; 
           }
         };
         o.appendChild(b);
