@@ -20,7 +20,6 @@
 
     h1 { color: #ff4d6d; padding: 20px; margin: 0; }
 
-    /* BOTO MUSICA */
     #btn-musica {
       background: #ff4d6d;
       color: white;
@@ -195,11 +194,10 @@
   </footer>
 
   <script>
-    // FUNCIÓ PER INICIAR LA MUSICA QUAN ELLA CLICA
     function iniciarMusica() {
       const contenedor = document.getElementById('contenedor-musica');
       contenedor.innerHTML = '<iframe width="0" height="0" src="https://www.youtube.com/embed/zdztQg038yc?autoplay=1&loop=1&playlist=zdztQg038yc" frameborder="0" allow="autoplay"></iframe>';
-      document.getElementById('btn-musica').style.display = 'none'; // Amaga el botó un cop clica
+      document.getElementById('btn-musica').style.display = 'none';
     }
 
     const fechaInicio = new Date(2025, 3, 1);
@@ -239,24 +237,44 @@
       p.innerText = m;
     }
 
+    // --- CODI CORREGIT DEL JOC ---
     const preguntes = [
       { p: "Quina de les tres és el que mes m'agrada de tu?", r: ["Els teus peuets", "La teva careta", "El teu caràcter"], c: 0 },
       { p: "Quina paraule vam utilitzar per confesarnos?", r: ["Un Helicopter🚁", "Un avio🛩️", "Un Taxi🚕"], c: 1 },
       { p: "Quin es el mote que mes m'agrada dirte?", r: ["Mi wuchu", "Mi wuchu wuchu", "Awuchu awu"], c: 0 }
     ];
     let pAct = 0;
+
     function carregarP() {
       const d = preguntes[pAct];
+      const resText = document.getElementById('resultat-quiz');
       document.getElementById('pregunta').innerText = d.p;
-      const o = document.getElementById('opcions'); o.innerHTML = "";
+      const o = document.getElementById('opcions'); 
+      o.innerHTML = "";
+      resText.innerText = ""; // Neteja el text anterior
+
       d.r.forEach((res, i) => {
-        const b = document.createElement('button'); b.className='btn-quiz'; b.innerText=res;
+        const b = document.createElement('button'); 
+        b.className='btn-quiz'; 
+        b.innerText=res;
         b.onclick = () => {
-          if(i===d.c) { 
-            pAct++; 
-            if(pAct<preguntes.length) carregarP(); 
-            else document.getElementById('minijoc').innerHTML="<h3>🎉ETS LA MILLOR!🎉</h3>"; 
-          } else { alert("Wuchu... m'estimes o no? 😜"); }
+          if(i === d.c) { 
+            resText.style.color = "green";
+            resText.innerText = "Molt bé, cuchi! ✨";
+            
+            // Esperem un segon perquè vegi que ha encertat abans de canviar
+            setTimeout(() => {
+                pAct++; 
+                if(pAct < preguntes.length) {
+                    carregarP(); 
+                } else { 
+                    document.getElementById('minijoc').innerHTML="<h3>🎉 ETS LA MILLOR I HO SAPS TOT DE NOSALTRES! 🎉</h3>"; 
+                }
+            }, 1000);
+          } else { 
+            resText.style.color = "red";
+            resText.innerText = "Wuchu... m'estimes o no? 😜"; 
+          }
         };
         o.appendChild(b);
       });
