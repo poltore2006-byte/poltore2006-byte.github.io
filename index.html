@@ -74,26 +74,30 @@
     .flip-card-front { background-color: #fff9c4; color: #333; }
     .flip-card-back { background-color: #f8bbd0; color: #333; transform: rotateY(180deg); }
 
-    /* CÀPSULA DEL TEMPS (POLAROIDS) */
+    /* CÀPSULA DEL TEMPS AMB FONS DE FUSTA */
     #capsula-records {
-      width: 95%; max-width: 550px; height: 400px; margin: 20px auto;
-      position: relative; background: #fdf2e9; border-radius: 20px;
-      border: 4px solid #8c7851; box-shadow: inset 0 0 30px rgba(0,0,0,0.1);
+      width: 95%; max-width: 550px; height: 420px; margin: 20px auto;
+      position: relative; 
+      background-color: #6d4c41;
+      background-image: repeating-linear-gradient(90deg, transparent, transparent 50px, rgba(0,0,0,0.1) 50px, rgba(0,0,0,0.1) 100px);
+      border-radius: 20px;
+      border: 8px double #3e2723; 
+      box-shadow: 0 10px 25px rgba(0,0,0,0.3);
       overflow: hidden;
     }
     .polaroid {
       position: absolute; background: white; padding: 10px 10px 20px 10px;
-      box-shadow: 3px 3px 10px rgba(0,0,0,0.2); border-radius: 2px;
-      width: 110px; cursor: pointer; transition: all 0.5s ease-in-out; z-index: 1;
+      box-shadow: 5px 5px 15px rgba(0,0,0,0.4); border-radius: 2px;
+      width: 120px; cursor: pointer; transition: all 0.5s ease-in-out; z-index: 1;
     }
-    .polaroid img { width: 100%; height: 90px; object-fit: cover; border: 1px solid #ddd; }
-    .polaroid p { margin: 8px 0 0 0; font-size: 10px; color: #333; text-align: center; }
+    .polaroid img { width: 100%; height: 100px; object-fit: cover; border: 1px solid #ddd; }
+    .polaroid p { margin: 8px 0 0 0; font-size: 11px; color: #333; text-align: center; font-weight: bold; }
     
     .polaroid:hover {
-      transform: rotate(0deg) scale(1.7) !important;
+      transform: rotate(0deg) scale(1.6) !important;
       top: 50% !important; left: 50% !important;
-      margin-top: -75px !important; margin-left: -55px !important;
-      box-shadow: 10px 10px 30px rgba(0,0,0,0.4); z-index: 100;
+      margin-top: -85px !important; margin-left: -60px !important;
+      box-shadow: 15px 15px 35px rgba(0,0,0,0.6); z-index: 100;
     }
 
     /* ALTRES */
@@ -174,26 +178,29 @@
     <div class="flip-card"><div class="flip-card-inner"><div class="flip-card-front">"LAIAA, TESTIMO" </div><div class="flip-card-back">"AIIIIIIII PARAAAA 😭😭😭, JOOO TAMBEEEE" </div></div></div>
   </div>
 
-  <h2 style="color: #1b4332; margin-top: 50px;">📸 Els Nostres Cims: Càpsula del Temps</h2>
+  <h2 style="color: #1b4332; margin-top: 50px;">🏔️ Els Nostres Cims: Càpsula del Temps</h2>
   <div id="capsula-records">
-      <div style="font-size: 30px; position: absolute; top: 10px; left: 10px; opacity: 0.2;">🌲</div>
-      <div style="font-size: 25px; position: absolute; bottom: 15px; right: 15px; opacity: 0.2;">🧭</div>
+      <div style="font-size: 40px; position: absolute; top: 20px; left: 200px; opacity: 0.3;">🌲</div>
+      <div style="font-size: 30px; position: absolute; bottom: 40px; left: 30px; opacity: 0.3;">⛰️</div>
+      <div style="font-size: 35px; position: absolute; top: 150px; right: 40px; opacity: 0.3;">🦅</div>
+      <div style="font-size: 30px; position: absolute; top: 10px; left: 10px; opacity: 0.5;">🌲</div>
+      <div style="font-size: 25px; position: absolute; bottom: 15px; right: 15px; opacity: 0.5;">🧭</div>
 
-      <div class="polaroid" style="top: 20px; left: 30px; transform: rotate(-8deg);">
+      <div class="polaroid" style="top: 30px; left: 40px; transform: rotate(-10deg);">
           <img src="Montserrat.jpg" alt="Record 1">
           <p>Montserrat! ⛰️</p>
       </div>
-      <div class="polaroid" style="top: 40px; right: 30px; transform: rotate(12deg);">
+      <div class="polaroid" style="top: 50px; right: 50px; transform: rotate(8deg);">
           <img src="MOLA.jpg" alt="Record 2">
           <p>La Mola ✨</p>
       </div>
-      <div class="polaroid" style="bottom: 50px; left: 60px; transform: rotate(5deg);">
+      <div class="polaroid" style="bottom: 40px; left: 120px; transform: rotate(-4deg);">
           <img src="Molina.jpg" alt="Record 3">
           <p>La Molina ❄️</p>
       </div>
-      <div class="polaroid" style="bottom: 65px; right: 65px; transform: rotate(-15deg);">
+      <div class="polaroid" style="bottom: 30px; right: 40px; transform: rotate(12deg);">
           <img src="Next.jpg" alt="Record 4">
-          <p>????</p>
+          <p>Next mountain?? ❓</p>
       </div>
   </div>
 
